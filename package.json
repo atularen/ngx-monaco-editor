@@ -1,0 +1,80 @@
+{
+  "name": "ngx-monaco-editor",
+  "version": "1.0.0",
+  "description": "Monaco Code Editor For Angular",
+  "keywords": [
+    "angular",
+    "monaco",
+    "monaco-editor",
+    "code",
+    "editor",
+    "reusable"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "bash scripts/build-release",
+    "test": "echo \"Error: no test... minimal project\" && exit 1",
+    "lint": "echo \"Error: no lint... minimal project\" && exit 1",
+    "e2e": "echo \"Error: no e2e... minimal project\" && exit 1",
+    "bump-dev": "gulp bump-version",
+    "bump-patch": "gulp bump-version --ver patch",
+    "bump-minor": "gulp bump-version --ver minor",
+    "bump-major": "gulp bump-version --ver major",
+    "aot": "./node_modules/.bin/ngc -p deploy/platform/tsconfig-aot.json && tsc -p src/platform/tsconfig-aot.json",
+    "minify": "uglifyjs deploy/platform/editor/editor.umd.js --screw-ie8 --compress --mangle --comments --output deploy/platform/editor/editor.umd.min.js",
+    "npm-publish": "npm run build && bash scripts/npm-publish"
+  },
+  "engines": {
+    "node": ">=6.9",
+    "npm": ">3"
+  },
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atularen/ngx-monaco-editor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/atularen/ngx-monaco-editor/issues"
+  },
+  "author": "Atul Kumar",
+  "contributors": [
+    "Atul Kumar <atulaggarwal4288@gmail.com>"
+  ],
+  "dependencies": {
+    "@angular/common": "^4.0.0",
+    "@angular/compiler": "^4.0.0",
+    "@angular/core": "^4.0.0",
+    "@angular/forms": "^4.0.0",
+    "@angular/platform-browser": "^4.0.0",
+    "@angular/platform-browser-dynamic": "^4.0.0",
+    "@angular/router": "^4.0.0",
+    "core-js": "^2.4.1",
+    "monaco-editor": "^0.9.0",
+    "rxjs": "^5.4.1",
+    "zone.js": "^0.8.14"
+  },
+  "devDependencies": {
+    "@angular/cli": "1.2.7",
+    "@angular/compiler-cli": "^4.0.0",
+    "@angular/language-service": "^4.0.0",
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-bump": "^2.7.0",
+    "gulp-help": "^1.6.1",
+    "gulp-if": "^2.0.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-util": "^3.0.8",
+    "merge2": "^1.1.0",
+    "minimist": "^1.2.0",
+    "require-dir": "^0.3.2",
+    "rollup": "^0.45.2",
+    "rollup-plugin-commonjs": "^8.1.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "semver": "^5.4.1",
+    "typescript": "~2.3.3",
+    "uglify-js": "^3.0.27"
+  }
+}
