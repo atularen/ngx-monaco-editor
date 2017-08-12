@@ -1,6 +1,6 @@
 {
   "name": "ngx-monaco-editor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": false,
   "description": "Monaco Code Editor for Angular",
   "main": "./editor.umd.js",
@@ -8,6 +8,8 @@
   "typings": "./index.d.ts",
   "keywords": [
     "angular",
+    "angular2",
+    "angular4",
     "monaco",
     "monaco-editor",
     "code",
