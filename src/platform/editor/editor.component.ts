@@ -42,9 +42,13 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
 
   writeValue(value: any): void {
     this._value = value;
-    if (this._editor) {
-      this._editor.setValue(value);
-    }
+    // Fix for value change while dispose in process.
+    setTimeout(() => {
+      if (this._editor && value) {
+        this._editor.setValue(value);
+      }
+    });
+
   }
 
   registerOnChange(fn: any): void {
@@ -106,7 +110,9 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
 
   private initMonaco(options: any): void {
     this._editor = monaco.editor.create(this._editorContainer.nativeElement, options);
-    this._editor.setValue(this._value);
+    if (this._value) {
+      this._editor.setValue(this._value);
+    }
     this._editor.onDidChangeModelContent((e: any) => {
       let value = this._editor.getValue();
       this.propagateChange(value);
@@ -126,6 +132,7 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
     }
     if (this._editor) {
       this._editor.dispose();
+      this._editor = undefined;
     }
   }
 }
