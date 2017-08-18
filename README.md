@@ -1,4 +1,4 @@
-# Monaco Editor Component for Angular2+.
+# Monaco Editor Component for Angular2.
 
 Using this Module you can utilize the Monaco Editor as an Angular Component. Feel free to contribute, raise feature requests and make it better.
 
