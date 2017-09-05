@@ -1,6 +1,8 @@
-# Monaco Editor Component for Angular2.
+# Monaco Editor Component for Angular 2 and Angular 4.
 
 Using this Module you can utilize the Monaco Editor as an Angular Component. Feel free to contribute, raise feature requests and make it better.
+
+Supports all the options available in monaco-editor [Monaco Editor Options](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditorconstructionoptions.html)
 
 ## Setup
 
@@ -68,6 +70,22 @@ Include editor in html with options and ngModel bindings.(eg: app.component.html
 ```html
 <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
 ```
+
+### Styling
+Add class to editor tag. (eg. class="my-code-editor")
+```html
+<ngx-monaco-editor class="my-code-editor" [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+```
+Add styling in css/scss file:
+```scss
+.my-code-editor {
+  .editorContainer {
+    height: calc(100vh - 100px);
+  }
+}
+```
+Set automaticLayout option to adjust editor size dynamically. Recommended when using in modal dialog or tabs where editor is not visible initially.
+
 
 ## Links
 [Monaco Editor](https://github.com/Microsoft/monaco-editor/)<br/>
