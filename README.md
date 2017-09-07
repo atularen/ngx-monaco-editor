@@ -103,7 +103,7 @@ export class AppComponent {
 }
 ```
 
-## Insert Content at Cursor position
+### Insert Content at Cursor position
 import MonacoEditor and also supply at providers (eg: on app.module.ts):
 ```typescript
 import { BrowserModule } from '@angular/platform-browser';
