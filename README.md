@@ -86,6 +86,22 @@ Add styling in css/scss file:
 ```
 Set automaticLayout option to adjust editor size dynamically. Recommended when using in modal dialog or tabs where editor is not visible initially.
 
+### Custom operations
+Output event (onInit) expose editor instance that can be used for performing custom operations on the editor. 
+```html
+<ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code" (onInit)="onInit($event)"></ngx-monaco-editor>
+```
+
+```typescript
+export class AppComponent {
+  editorOptions = {theme: 'vs-dark', language: 'javascript'};
+  code: string= 'function x() {\nconsole.log("Hello world!");\n}';
+  onInit(editor) {
+      let line = editor.getPosition();
+      console.log(line);
+    }
+}
+```
 
 ## Links
 [Monaco Editor](https://github.com/Microsoft/monaco-editor/)<br/>

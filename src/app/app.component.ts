@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+declare const monaco: any;
 
 @Component({
   selector: 'app-root',
@@ -7,12 +8,13 @@ import { Component } from '@angular/core';
       Welcome to {{title}}!!
     </h1>
     <button (click)="updateOptions()">Change Language</button>
-    <ngx-monaco-editor [options]="options" [(ngModel)]="code"></ngx-monaco-editor>
+    <ngx-monaco-editor [options]="options" [(ngModel)]="code" (onInit)="onInit($event)"></ngx-monaco-editor>
     <pre>{{code}}</pre>
   `,
   styles: []
 })
 export class AppComponent {
+  editor: any;
   options = {
     language: 'javascript',
     theme: 'vs-dark'
@@ -50,5 +52,15 @@ return {RenderType_AppComponent:RenderType_AppComponent,View_AppComponent_0:View
 
   updateOptions(){
     this.options = Object.assign({}, this.options, {language: 'css'});
+  }
+
+  onInit(editor) {
+    this.editor = editor;
+    var line = editor.getPosition();
+    var range = new monaco.Range(line.lineNumber, 1, line.lineNumber, 1);
+    var id = { major: 1, minor: 1 };
+    var text = "FOO";
+    var op = {identifier: id, range: range, text: text, forceMoveMarkers: true};
+    editor.executeEdits("my-source", [op]);
   }
 }

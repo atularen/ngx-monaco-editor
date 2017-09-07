@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, forwardRef, Input, NgZone, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, forwardRef, Input, NgZone, Output, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Rx';
@@ -30,6 +30,7 @@ declare const require: any;
 })
 export class EditorComponent implements AfterViewInit, ControlValueAccessor {
   @ViewChild('editorContainer') _editorContainer: ElementRef;
+  @Output() onInit = new EventEmitter<any>();
   private _value: string = '';
   private _editor: any;
   private _options: any;
@@ -123,7 +124,8 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
     if (this._windowResizeSubscription) {
       this._windowResizeSubscription.unsubscribe();
     }
-    this._windowResizeSubscription = Observable.fromEvent(window, 'resize').subscribe(() => console.log('dsdsd'), this._editor.layout());
+    this._windowResizeSubscription = Observable.fromEvent(window, 'resize').subscribe(() => this._editor.layout());
+    this.onInit.emit(this._editor);
   }
 
   ngOnDestroy() {
