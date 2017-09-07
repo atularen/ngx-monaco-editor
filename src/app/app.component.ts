@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MonacoEditor } from '../platform/editor/editor.module';
 declare const monaco: any;
 
 @Component({
@@ -8,6 +9,7 @@ declare const monaco: any;
       Welcome to {{title}}!!
     </h1>
     <button (click)="updateOptions()">Change Language</button>
+    <button (click)="onInsertContentClick()">Insert Content</button>
     <ngx-monaco-editor [options]="options" [(ngModel)]="code" (onInit)="onInit($event)"></ngx-monaco-editor>
     <pre>{{code}}</pre>
   `,
@@ -63,4 +65,12 @@ return {RenderType_AppComponent:RenderType_AppComponent,View_AppComponent_0:View
     var op = {identifier: id, range: range, text: text, forceMoveMarkers: true};
     editor.executeEdits("my-source", [op]);
   }
+
+  onInsertContentClick() {
+    this.monacoEditor.insert('<p>This is the default content</p>');
+  }
+
+  constructor(
+    private monacoEditor: MonacoEditor
+  ) { }
 }

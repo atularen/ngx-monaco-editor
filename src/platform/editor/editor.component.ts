@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Rx';
 
 let loadedMonaco: boolean = false;
 let loadPromise: Promise<void>;
+let monacoEditor: any;
 declare const monaco: any;
 declare const require: any;
 
@@ -125,6 +126,7 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
       this._windowResizeSubscription.unsubscribe();
     }
     this._windowResizeSubscription = Observable.fromEvent(window, 'resize').subscribe(() => this._editor.layout());
+    monacoEditor = this._editor;
     this.onInit.emit(this._editor);
   }
 
@@ -137,4 +139,21 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
       this._editor = undefined;
     }
   }
+}
+
+export class EditorComponentHelper {
+
+  insert(insert: string) {
+    if (insert !== null && loadedMonaco) {
+      const position = monacoEditor.getPosition();
+      const range = new monaco.Range(position.lineNumber, position.column, position.lineNumber, position.column);
+      const id = { major: 1, minor: 1 };
+      const op = {identifier: id, range: range, text: insert, forceMoveMarkers: false };
+      monacoEditor.executeEdits(insert, [op]);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 }

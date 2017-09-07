@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EditorComponent } from './editor.component';
+import { EditorComponent, EditorComponentHelper } from './editor.component';
 
 @NgModule({
   imports: [
@@ -15,3 +15,6 @@ import { EditorComponent } from './editor.component';
 })
 export class MonacoEditorModule {
 }
+export class MonacoEditor extends EditorComponentHelper {
+}
+
