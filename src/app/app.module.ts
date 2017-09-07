@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { MonacoEditorModule } from '../platform/editor/editor.module';
+import { MonacoEditorModule, MonacoEditor } from '../platform/editor/editor.module';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     MonacoEditorModule
   ],
-  providers: [],
+  providers: [MonacoEditor],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

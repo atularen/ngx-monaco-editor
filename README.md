@@ -103,6 +103,52 @@ export class AppComponent {
 }
 ```
 
+### Insert Content at Cursor position
+import MonacoEditor and also supply at providers (eg: on app.module.ts):
+```typescript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppComponent } from './app.component';
+import { MonacoEditorModule, MonacoEditor } from 'ngx-monaco-editor';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    MonacoEditorModule
+  ],
+  providers: [MonacoEditor],
+  bootstrap: [AppComponent]
+})
+export class AppModule {
+}
+```
+import MonacoEditor and define at constructor (eg: on app.component.ts):
+```typescript
+import { Component } from '@angular/core';
+import { MonacoEditor } from 'ngx-monaco-editor';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html'
+})
+export class AppComponent {
+  editorOptions = {theme: 'vs-dark', language: 'javascript'};
+  code: string= 'function x() {\nconsole.log("Hello world!");\n}';
+
+  onInsertContentClick() {
+    this.monacoEditor.insert('<p>This is the default content</p>');
+  }
+
+  constructor(
+    private monacoEditor: MonacoEditor
+  ) { }
+}
+```
+
 ## Links
 [Monaco Editor](https://github.com/Microsoft/monaco-editor/)<br/>
 [Monaco Editor Options](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditorconstructionoptions.html)
