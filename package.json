@@ -1,6 +1,6 @@
 {
   "name": "ngx-monaco-editor",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Monaco Code Editor For Angular",
   "keywords": [
     "angular",
@@ -43,22 +43,22 @@
     "Atul Kumar <atulaggarwal4288@gmail.com>"
   ],
   "dependencies": {
-    "@angular/common": "^4.0.0",
-    "@angular/compiler": "^4.0.0",
-    "@angular/core": "^4.0.0",
-    "@angular/forms": "^4.0.0",
-    "@angular/platform-browser": "^4.0.0",
-    "@angular/platform-browser-dynamic": "^4.0.0",
-    "@angular/router": "^4.0.0",
+    "@angular/common": "^4.2.4",
+    "@angular/compiler": "^4.2.4",
+    "@angular/core": "^4.2.4",
+    "@angular/forms": "^4.2.4",
+    "@angular/platform-browser": "^4.2.4",
+    "@angular/platform-browser-dynamic": "^4.2.4",
+    "@angular/router": "^4.2.4",
     "core-js": "^2.4.1",
     "monaco-editor": "^0.9.0",
-    "rxjs": "^5.4.1",
+    "rxjs": "^5.4.2",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
-    "@angular/cli": "1.2.7",
-    "@angular/compiler-cli": "^4.0.0",
-    "@angular/language-service": "^4.0.0",
+    "@angular/cli": "1.4.2",
+    "@angular/compiler-cli": "^4.2.4",
+    "@angular/language-service": "^4.2.4",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-bump": "^2.7.0",

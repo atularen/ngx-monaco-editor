@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, forwardRef, Input, NgZone, Output, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
-import { Observable } from 'rxjs/Rx';
+import { fromEvent } from 'rxjs/observable/fromEvent';
 
 let loadedMonaco: boolean = false;
 let loadPromise: Promise<void>;
@@ -124,7 +124,7 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
     if (this._windowResizeSubscription) {
       this._windowResizeSubscription.unsubscribe();
     }
-    this._windowResizeSubscription = Observable.fromEvent(window, 'resize').subscribe(() => this._editor.layout());
+    this._windowResizeSubscription = fromEvent(window, 'resize').subscribe(() => this._editor.layout());
     this.onInit.emit(this._editor);
   }
 
