@@ -74,6 +74,10 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
   }
 
   ngAfterViewInit(): void {
+
+    let nodeRequire: any = (<any>window).require;
+    let amdRequire: any;
+
     if (loadedMonaco) {
       // Wait until monaco editor is available
       loadPromise.then(() => {
@@ -87,9 +91,11 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
           return;
         }
         let onGotAmdLoader: any = () => {
+          amdRequire = (<any>window).require;
+          (<any>window).require = nodeRequire;
           // Load monaco
-          (<any>window).require.config({ paths: { 'vs': 'assets/monaco/vs' } });
-          (<any>window).require(['vs/editor/editor.main'], () => {
+          amdRequire.require.config({ paths: { 'vs': 'assets/monaco/vs' } });
+          amdRequire.require(['vs/editor/editor.main'], () => {
             this.initMonaco(this.options);
             resolve();
           });
