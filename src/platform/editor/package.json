@@ -1,6 +1,6 @@
 {
   "name": "ngx-monaco-editor",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "private": false,
   "description": "Monaco Code Editor for Angular",
   "main": "./editor.umd.js",
@@ -31,7 +31,7 @@
     "Atul Kumar <atulaggarwal4288@gmail.com>"
   ],
   "peerDependencies": {
-    "@angular/common": "^4.2.0",
-    "@angular/core": "^4.2.0"
+    "@angular/common": ">= 2.0.0",
+    "@angular/core": ">= 2.0.0"
   }
 }
