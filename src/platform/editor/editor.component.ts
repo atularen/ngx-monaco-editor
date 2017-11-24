@@ -45,7 +45,7 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
     this._value = value;
     // Fix for value change while dispose in process.
     setTimeout(() => {
-      if (this._editor && value) {
+      if (this._editor && value != null) {
         this._editor.setValue(value);
       }
     });
@@ -111,7 +111,7 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
 
   private initMonaco(options: any): void {
     this._editor = monaco.editor.create(this._editorContainer.nativeElement, options);
-    if (this._value) {
+    if (this._value != null) {
       this._editor.setValue(this._value);
     }
     this._editor.onDidChangeModelContent((e: any) => {
