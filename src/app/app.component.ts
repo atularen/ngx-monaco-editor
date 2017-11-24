@@ -8,12 +8,18 @@ declare const monaco: any;
       Welcome to {{title}}!!
     </h1>
     <button (click)="updateOptions()">Change Language</button>
+    <button (click)="code = ''; codeInput=''">Set Value To Empty String</button>
+    <button (click)="code = null; codeInput=null">Set Value To Null</button>
+    <button (click)="code = undefined; codeInput=undefined">Set Value To undefined</button>
     <ngx-monaco-editor [options]="options" [(ngModel)]="code" (onInit)="onInit($event)"></ngx-monaco-editor>
+    <input type="text" [(ngModel)]="codeInput"  #inputControl/>
+    {{codeInput | json}} {{inputControl.value | json}}
     <pre>{{code}}</pre>
   `,
   styles: []
 })
 export class AppComponent {
+  codeInput: string = 'fdsfsdf';
   editor: any;
   options = {
     language: 'javascript',
@@ -61,6 +67,6 @@ return {RenderType_AppComponent:RenderType_AppComponent,View_AppComponent_0:View
     var id = { major: 1, minor: 1 };
     var text = "FOO";
     var op = {identifier: id, range: range, text: text, forceMoveMarkers: true};
-    editor.executeEdits("my-source", [op]);
+    // editor.executeEdits("my-source", [op]);
   }
 }

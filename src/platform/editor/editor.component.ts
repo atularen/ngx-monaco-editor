@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, forwardRef, Input, NgZone, Output, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Subscription } from 'rxjs/Subscription';
 import { fromEvent } from 'rxjs/observable/fromEvent';
+import { Subscription } from 'rxjs/Subscription';
 
 let loadedMonaco: boolean = false;
 let loadPromise: Promise<void>;
@@ -42,11 +42,11 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
   }
 
   writeValue(value: any): void {
-    this._value = value;
+    this._value = value || '';
     // Fix for value change while dispose in process.
     setTimeout(() => {
-      if (this._editor && value) {
-        this._editor.setValue(value);
+      if (this._editor) {
+        this._editor.setValue(this._value);
       }
     });
 
@@ -111,9 +111,7 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
 
   private initMonaco(options: any): void {
     this._editor = monaco.editor.create(this._editorContainer.nativeElement, options);
-    if (this._value) {
-      this._editor.setValue(this._value);
-    }
+    this._editor.setValue(this._value);
     this._editor.onDidChangeModelContent((e: any) => {
       let value = this._editor.getValue();
       this.propagateChange(value);
