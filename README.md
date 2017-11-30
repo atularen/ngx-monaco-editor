@@ -34,6 +34,7 @@ Include MonacoEditorModule in Feature Module where you want to use the editor co
 ```typescript
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
@@ -44,6 +45,7 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     MonacoEditorModule
   ],
   providers: [],
@@ -74,7 +76,9 @@ Include editor in html with options and ngModel bindings.(eg: app.component.html
 ### Styling
 Add class to editor tag. (eg. class="my-code-editor")
 ```html
-<ngx-monaco-editor class="my-code-editor" [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+<form>
+  <ngx-monaco-editor name="editor" class="my-code-editor" [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+</form>
 ```
 Add styling in css/scss file:
 ```scss
@@ -89,7 +93,9 @@ Set automaticLayout option to adjust editor size dynamically. Recommended when u
 ### Custom operations
 Output event (onInit) expose editor instance that can be used for performing custom operations on the editor. 
 ```html
-<ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code" (onInit)="onInit($event)"></ngx-monaco-editor>
+<form>
+  <ngx-monaco-editor name="editor" [options]="editorOptions" [(ngModel)]="code" (onInit)="onInit($event)"></ngx-monaco-editor>
+</form>
 ```
 
 ```typescript
