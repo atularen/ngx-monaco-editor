@@ -82,13 +82,14 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
     } else {
       loadedMonaco = true;
       loadPromise = new Promise<void>((resolve: any) => {
+        let baseUrl = this._options.baseUrl || '/assets';
         if (typeof((<any>window).monaco) === 'object') {
           resolve();
           return;
         }
         let onGotAmdLoader: any = () => {
           // Load monaco
-          (<any>window).require.config({ paths: { 'vs': '/assets/monaco/vs' } });
+          (<any>window).require.config({ paths: { 'vs': `{baseUrl}/monaco/vs` } });
           (<any>window).require(['vs/editor/editor.main'], () => {
             this.initMonaco(this.options);
             resolve();
@@ -99,7 +100,7 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
         if (!(<any>window).require) {
           let loaderScript: HTMLScriptElement = document.createElement('script');
           loaderScript.type = 'text/javascript';
-          loaderScript.src = '/assets/monaco/vs/loader.js';
+          loaderScript.src = `{baseUrl}/monaco/vs/loader.js`;
           loaderScript.addEventListener('load', onGotAmdLoader);
           document.body.appendChild(loaderScript);
         } else {
