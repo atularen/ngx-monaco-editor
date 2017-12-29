@@ -1,7 +1,8 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, forwardRef, Input, NgZone, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, forwardRef, Inject, Input, NgZone, Output, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 import { Subscription } from 'rxjs/Subscription';
+import { NGX_MONACO_EDITOR_CONFIG, NgxMonacoEditorConfig } from './config';
 
 let loadedMonaco: boolean = false;
 let loadPromise: Promise<void>;
@@ -38,7 +39,8 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
   propagateChange = (_: any) => {};
   onTouched = () => {};
 
-  constructor(private zone: NgZone) {
+  constructor(private zone: NgZone,
+              @Inject(NGX_MONACO_EDITOR_CONFIG) private config: NgxMonacoEditorConfig) {
   }
 
   writeValue(value: any): void {
@@ -62,7 +64,7 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
 
   @Input('options')
   set options(options: string) {
-    this._options = options;
+    this._options = Object.assign({}, this.config.defaultOptions, options);
     if (this._editor) {
       this._editor.dispose();
       this.initMonaco(options);
@@ -82,13 +84,14 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
     } else {
       loadedMonaco = true;
       loadPromise = new Promise<void>((resolve: any) => {
+        const baseUrl = this.config.baseUrl || '/assets';
         if (typeof((<any>window).monaco) === 'object') {
           resolve();
           return;
         }
-        let onGotAmdLoader: any = () => {
+        const onGotAmdLoader: any = () => {
           // Load monaco
-          (<any>window).require.config({ paths: { 'vs': '/assets/monaco/vs' } });
+          (<any>window).require.config({ paths: { 'vs': `${baseUrl}/monaco/vs` } });
           (<any>window).require(['vs/editor/editor.main'], () => {
             this.initMonaco(this.options);
             resolve();
@@ -97,9 +100,9 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
 
         // Load AMD loader if necessary
         if (!(<any>window).require) {
-          let loaderScript: HTMLScriptElement = document.createElement('script');
+          const loaderScript: HTMLScriptElement = document.createElement('script');
           loaderScript.type = 'text/javascript';
-          loaderScript.src = '/assets/monaco/vs/loader.js';
+          loaderScript.src = `${baseUrl}/monaco/vs/loader.js`;
           loaderScript.addEventListener('load', onGotAmdLoader);
           document.body.appendChild(loaderScript);
         } else {
@@ -113,11 +116,16 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
     this._editor = monaco.editor.create(this._editorContainer.nativeElement, options);
     this._editor.setValue(this._value);
     this._editor.onDidChangeModelContent((e: any) => {
-      let value = this._editor.getValue();
+      const value = this._editor.getValue();
       this.propagateChange(value);
       // value is not propagated to parent when executing outside zone.
       this.zone.run(() => this._value = value);
     });
+
+    this._editor.onDidBlurEditor((e: any) => {
+      this.onTouched();
+    });
+
     // refresh layout on resize event.
     if (this._windowResizeSubscription) {
       this._windowResizeSubscription.unsubscribe();

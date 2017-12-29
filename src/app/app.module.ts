@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     FormsModule,
-    MonacoEditorModule
+    MonacoEditorModule.forRoot({baseUrl: 'assets', defaultOptions: { scrollBeyondLastLine: false }})
   ],
   providers: [],
   bootstrap: [AppComponent]
