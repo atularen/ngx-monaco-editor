@@ -55,14 +55,14 @@ gulp.task('rollup-code', '', function() {
     return previous
       .then(() => {
         return rollup({
-          entry: path.join(config.paths.deployed, name, 'index.js'),
+          input: path.join(config.paths.deployed, name, 'index.js'),
           context: 'window',
           external: Object.keys(globals)
         });
       })
       .then((bundle) => {
         return bundle.generate({
-          moduleName: `td.${camelCase(name)}`,
+          name: `td.${camelCase(name)}`,
           format: 'umd',
           exports: 'named',
           globals
