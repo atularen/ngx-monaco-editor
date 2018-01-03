@@ -93,6 +93,9 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
           // Load monaco
           (<any>window).require.config({ paths: { 'vs': `${baseUrl}/monaco/vs` } });
           (<any>window).require(['vs/editor/editor.main'], () => {
+            if(typeof this.config.onMonacoLoad === 'function') {
+              this.config.onMonacoLoad();
+            }
             this.initMonaco(this.options);
             resolve();
           });

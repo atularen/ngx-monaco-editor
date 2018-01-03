@@ -11,7 +11,9 @@ declare const monaco: any;
     <button (click)="code = ''; codeInput=''">Set Value To Empty String</button>
     <button (click)="code = null; codeInput=null">Set Value To Null</button>
     <button (click)="code = undefined; codeInput=undefined">Set Value To undefined</button>
+    <button (click)="toggle = !toggle">Toggle Editor</button>
     <ngx-monaco-editor [options]="options" [(ngModel)]="code" (onInit)="onInit($event)"></ngx-monaco-editor>
+    <ngx-monaco-editor *ngIf="toggle" [options]="options" [(ngModel)]="code"></ngx-monaco-editor>
     <input type="text" [(ngModel)]="codeInput"  #inputControl/>
     {{codeInput | json}} {{inputControl.value | json}}
     <pre>{{code}}</pre>
@@ -21,6 +23,7 @@ declare const monaco: any;
 export class AppComponent {
   codeInput: string = 'fdsfsdf';
   editor: any;
+  toggle = false;
   options = {
     language: 'javascript',
     theme: 'vs-dark'

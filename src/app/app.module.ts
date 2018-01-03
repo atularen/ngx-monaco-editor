@@ -1,9 +1,16 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
-import { MonacoEditorModule } from '../platform/editor/editor.module';
 import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { NgxMonacoEditorConfig } from '../platform/editor/config';
+import { MonacoEditorModule } from '../platform/editor/editor.module';
+import { AppComponent } from './app.component';
+
+const monacoConfig: NgxMonacoEditorConfig = {
+  baseUrl: 'assets',
+  defaultOptions: { scrollBeyondLastLine: false },
+  onMonacoLoad: () => { console.log((<any>window).monaco); }
+};
 
 @NgModule({
   declarations: [
@@ -12,9 +19,10 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     FormsModule,
-    MonacoEditorModule.forRoot({baseUrl: 'assets', defaultOptions: { scrollBeyondLastLine: false }})
+    MonacoEditorModule.forRoot(monacoConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
