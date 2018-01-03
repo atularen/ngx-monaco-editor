@@ -105,7 +105,7 @@ export class AppComponent {
 
 ## Configurations
 `forRoot()` method of MonacoEditorModule accepts config of type `NgxMonacoEditorConfig`.
-```
+```typescript
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
