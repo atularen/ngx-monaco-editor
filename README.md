@@ -30,7 +30,7 @@ Add the glob to assets in .angular-cli.json (to make monaco-editor lib available
  ```
 
 ### Sample
-Include MonacoEditorModule in Feature Module where you want to use the editor component.(eg: app.module.ts): 
+Include MonacoEditorModule in Main Module and Feature Modules where you want to use the editor component.(eg: app.module.ts): 
 ```typescript
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -44,7 +44,7 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
   ],
   imports: [
     BrowserModule,
-    MonacoEditorModule
+    MonacoEditorModule.forRoot() // use forRoot() in main app module only.
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -86,7 +86,7 @@ Add styling in css/scss file:
 ```
 Set automaticLayout option to adjust editor size dynamically. Recommended when using in modal dialog or tabs where editor is not visible initially.
 
-### Custom operations
+### Events
 Output event (onInit) expose editor instance that can be used for performing custom operations on the editor. 
 ```html
 <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code" (onInit)="onInit($event)"></ngx-monaco-editor>
@@ -100,6 +100,38 @@ export class AppComponent {
       let line = editor.getPosition();
       console.log(line);
     }
+}
+```
+
+## Configurations
+`forRoot()` method of MonacoEditorModule accepts config of type `NgxMonacoEditorConfig`.
+```
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { MonacoEditorModule, NgxMonacoEditorConfig } from 'ngx-monaco-editor';
+import { AppComponent } from './app.component';
+
+const monacoConfig: NgxMonacoEditorConfig = {
+  baseUrl: 'app-name/assets', // configure base path for monaco editor
+  defaultOptions: { scrollBeyondLastLine: false }, // pass deafult options to be used
+  onMonacoLoad: () => { console.log((<any>window).monaco); } // here monaco object will be avilable as window.monaco use this function to extend monaco editor functionalities.
+};
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    MonacoEditorModule.forRoot(monacoConfig)
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule {
 }
 ```
 
