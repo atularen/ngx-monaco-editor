@@ -138,3 +138,7 @@ export class AppModule {
 ## Links
 [Monaco Editor](https://github.com/Microsoft/monaco-editor/)<br/>
 [Monaco Editor Options](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditorconstructionoptions.html)
+
+## License
+
+MIT © [Atul Kumar](https://github.com/atularen)
