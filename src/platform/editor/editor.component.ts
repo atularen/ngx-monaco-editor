@@ -1,3 +1,5 @@
+/// <reference path="../../../node_modules/monaco-editor/monaco.d.ts" />
+
 import { AfterViewInit, Component, ElementRef, EventEmitter, forwardRef, Inject, Input, NgZone, Output, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent } from 'rxjs/observable/fromEvent';
@@ -6,7 +8,7 @@ import { NGX_MONACO_EDITOR_CONFIG, NgxMonacoEditorConfig } from './config';
 
 let loadedMonaco: boolean = false;
 let loadPromise: Promise<void>;
-declare const monaco: any;
+
 declare const require: any;
 
 @Component({
@@ -33,8 +35,8 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
   @ViewChild('editorContainer') _editorContainer: ElementRef;
   @Output() onInit = new EventEmitter<any>();
   private _value: string = '';
-  private _editor: any;
-  private _options: any;
+  private _editor: monaco.editor.IStandaloneCodeEditor;
+  private _options: monaco.editor.IEditorConstructionOptions;
   private _windowResizeSubscription: Subscription;
   propagateChange = (_: any) => {};
   onTouched = () => {};
@@ -63,7 +65,7 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
   }
 
   @Input('options')
-  set options(options: string) {
+  set options(options: monaco.editor.IEditorConstructionOptions) {
     this._options = Object.assign({}, this.config.defaultOptions, options);
     if (this._editor) {
       this._editor.dispose();
@@ -71,7 +73,7 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
     }
   }
 
-  get options(): string {
+  get options(): monaco.editor.IEditorConstructionOptions {
     return this._options;
   }
 
@@ -115,7 +117,7 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
     }
   }
 
-  private initMonaco(options: any): void {
+  private initMonaco(options: monaco.editor.IEditorConstructionOptions): void {
     this._editor = monaco.editor.create(this._editorContainer.nativeElement, options);
     this._editor.setValue(this._value);
     this._editor.onDidChangeModelContent((e: any) => {
@@ -125,7 +127,7 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
       this.zone.run(() => this._value = value);
     });
 
-    this._editor.onDidBlurEditor((e: any) => {
+    this._editor.onDidBlurEditor(() => {
       this.onTouched();
     });
 
