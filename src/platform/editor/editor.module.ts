@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
+
 import { NGX_MONACO_EDITOR_CONFIG, NgxMonacoEditorConfig } from './config';
+import { DiffEditorComponent } from './diff-editor.component';
 import { EditorComponent } from './editor.component';
 
 @NgModule({
@@ -8,10 +10,12 @@ import { EditorComponent } from './editor.component';
     CommonModule
   ],
   declarations: [
-    EditorComponent
+    EditorComponent,
+    DiffEditorComponent
   ],
   exports: [
-    EditorComponent
+    EditorComponent,
+    DiffEditorComponent
   ]
 })
 export class MonacoEditorModule {

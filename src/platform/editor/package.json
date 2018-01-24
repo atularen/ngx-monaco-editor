@@ -8,8 +8,9 @@
   "typings": "./index.d.ts",
   "keywords": [
     "angular",
-    "angular2",
-    "angular4",
+    "angular 2",
+    "angular 4",
+    "angular 5",
     "monaco",
     "monaco-editor",
     "code",

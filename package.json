@@ -14,7 +14,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "bash scripts/build-release",
+    "build": "npm run copy:typings && bash scripts/build-release",
     "test": "echo \"Error: no test... minimal project\" && exit 1",
     "lint": "echo \"Error: no lint... minimal project\" && exit 1",
     "e2e": "echo \"Error: no e2e... minimal project\" && exit 1",
@@ -24,7 +24,8 @@
     "bump-major": "gulp bump-version --ver major",
     "aot": "./node_modules/.bin/ngc -p deploy/platform/tsconfig-aot.json && tsc -p src/platform/tsconfig-aot.json",
     "minify": "uglifyjs deploy/platform/editor/editor.umd.js --screw-ie8 --compress --mangle --comments --output deploy/platform/editor/editor.umd.min.js",
-    "npm-publish": "npm run build && bash scripts/npm-publish"
+    "npm-publish": "npm run build && bash scripts/npm-publish",
+    "copy:typings": "cp node_modules/monaco-editor/monaco.d.ts src/platform/editor"
   },
   "engines": {
     "node": ">=6.9",
