@@ -1,5 +1,8 @@
 # Monaco Editor Component for Angular 2 and above.
 
+ - Angular <= 4: v3.x.x
+ - Angular >= 5: v4.x.x
+
 Using this Module you can utilize the Monaco Editor as an Angular Component. Feel free to contribute, raise feature requests and make it better.
 
 Supports all the options available in monaco-editor [Monaco Editor Options](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditorconstructionoptions.html)
@@ -11,6 +14,11 @@ Supports all the options available in monaco-editor [Monaco Editor Options](http
 Install from npm repository:
 ```
 npm install ngx-monaco-editor --save
+ ```
+ 
+For angular version 4 and lower use v3.x.x
+```
+npm install ngx-monaco-editor@3.0.0 --save
  ```
  
 Add the glob to assets in .angular-cli.json (to make monaco-editor lib available to the app):
@@ -71,6 +79,34 @@ export class AppComponent {
 Include editor in html with options and ngModel bindings.(eg: app.component.html)
 ```html
 <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+```
+
+Include diff-editor in html with options.(eg: app.component.html)
+```html
+<ngx-monaco-diff-editor [options]="options" [originalModel]="originalModel" [modifiedModel]="modifiedModel"></ngx-monaco-diff-editor>
+```
+```typescript
+import { Component } from '@angular/core';
+import { DiffEditorModel } from 'ngx-monaco-editor';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html'
+})
+export class AppComponent {
+  options = {
+    theme: 'vs-dark'
+  };
+  originalModel: DiffEditorModel = {
+    code: 'heLLo world!',
+    language: 'text/plain'
+  };
+
+  modifiedModel: DiffEditorModel = {
+    code: 'hello orlando!',
+    language: 'text/plain'
+  };
+}
 ```
 
 ### Styling
