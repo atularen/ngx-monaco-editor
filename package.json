@@ -44,22 +44,22 @@
     "Atul Kumar <atulaggarwal4288@gmail.com>"
   ],
   "dependencies": {
-    "@angular/common": "^5.1.2",
-    "@angular/compiler": "^5.1.2",
-    "@angular/core": "^5.1.2",
-    "@angular/forms": "^5.1.2",
-    "@angular/platform-browser": "^5.1.2",
-    "@angular/platform-browser-dynamic": "^5.1.2",
-    "@angular/router": "^5.1.2",
-    "core-js": "^2.5.3",
+    "@angular/common": "^4.2.4",
+    "@angular/compiler": "^4.2.4",
+    "@angular/core": "^4.2.4",
+    "@angular/forms": "^4.2.4",
+    "@angular/platform-browser": "^4.2.4",
+    "@angular/platform-browser-dynamic": "^4.2.4",
+    "@angular/router": "^4.2.4",
+    "core-js": "^2.4.1",
     "monaco-editor": "^0.10.1",
-    "rxjs": "^5.5.6",
-    "zone.js": "^0.8.19"
+    "rxjs": "^5.4.2",
+    "zone.js": "^0.8.14"
   },
   "devDependencies": {
-    "@angular/cli": "1.6.3",
-    "@angular/compiler-cli": "^5.1.2",
-    "@angular/language-service": "^5.1.2",
+    "@angular/cli": "1.4.9",
+    "@angular/compiler-cli": "^4.2.4",
+    "@angular/language-service": "^4.2.4",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-bump": "^2.7.0",
@@ -75,7 +75,7 @@
     "rollup-plugin-commonjs": "^8.2.6",
     "rollup-plugin-node-resolve": "^3.0.0",
     "semver": "^5.4.1",
-    "typescript": "~2.5.3",
+    "typescript": "~2.3.3",
     "uglify-js": "^3.3.3"
   }
 }
