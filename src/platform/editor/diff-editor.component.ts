@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 
 import { BaseEditor } from './base-editor';
+import { NGX_MONACO_EDITOR_CONFIG, NgxMonacoEditorConfig } from './config';
 import { DiffEditorModel } from './types';
 
 @Component({
@@ -24,9 +25,13 @@ export class DiffEditorComponent extends BaseEditor {
   @Input() originalModel: DiffEditorModel;
   @Input() modifiedModel: DiffEditorModel;
 
+  constructor(@Inject(NGX_MONACO_EDITOR_CONFIG) private editorConfig: NgxMonacoEditorConfig) {
+    super(editorConfig);
+  }
+
   protected initMonaco(options: any): void {
 
-    if(!this.originalModel || !this.modifiedModel) {
+    if (!this.originalModel || !this.modifiedModel) {
       throw new Error('originalModel or modifiedModel not found for ngx-monaco-diff-editor');
     }
 
