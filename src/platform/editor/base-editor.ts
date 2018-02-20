@@ -27,7 +27,7 @@ export abstract class BaseEditor implements AfterViewInit, OnDestroy {
     return this._options;
   }
 
-  constructor(protected zone: NgZone, @Inject(NGX_MONACO_EDITOR_CONFIG) private config: NgxMonacoEditorConfig) {}
+  constructor(private config: NgxMonacoEditorConfig) {}
 
   ngAfterViewInit(): void {
     if (loadedMonaco) {

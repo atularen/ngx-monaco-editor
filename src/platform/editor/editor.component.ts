@@ -1,8 +1,9 @@
-import { Component, forwardRef } from '@angular/core';
+import { Component, forwardRef, Inject, NgZone } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 
 import { BaseEditor } from './base-editor';
+import { NGX_MONACO_EDITOR_CONFIG, NgxMonacoEditorConfig } from './config';
 
 @Component({
   selector: 'ngx-monaco-editor',
@@ -30,6 +31,10 @@ export class EditorComponent extends BaseEditor implements ControlValueAccessor 
 
   propagateChange = (_: any) => {};
   onTouched = () => {};
+
+  constructor(private zone: NgZone, @Inject(NGX_MONACO_EDITOR_CONFIG) private editorConfig: NgxMonacoEditorConfig) {
+    super(editorConfig);
+  }
 
   writeValue(value: any): void {
     this._value = value || '';
