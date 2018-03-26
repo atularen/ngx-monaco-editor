@@ -15,7 +15,7 @@ export abstract class BaseEditor implements AfterViewInit, OnDestroy {
   protected _windowResizeSubscription: Subscription;
 
   @Input('options')
-  set options(options: string) {
+  set options(options: any) {
     this._options = Object.assign({}, this.config.defaultOptions, options);
     if (this._editor) {
       this._editor.dispose();
@@ -23,7 +23,7 @@ export abstract class BaseEditor implements AfterViewInit, OnDestroy {
     }
   }
 
-  get options(): string {
+  get options(): any {
     return this._options;
   }
 

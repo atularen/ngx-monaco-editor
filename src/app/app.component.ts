@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DiffEditorModel } from '../platform/editor/types';
+import { DiffEditorModel, NgxEditorModel } from '../platform/editor';
 
 declare const monaco: any;
 
@@ -19,7 +19,10 @@ declare const monaco: any;
     <pre>{{code | json}}</pre>
 
     <h1>Diff Editor</h1>
-    <ngx-monaco-diff-editor [options]="options" [originalModel]="originalModel" [modifiedModel]="modifiedModel" (onInit)="onInit($event)"></ngx-monaco-diff-editor>
+    <ngx-monaco-diff-editor [options]="options" [originalModel]="originalModel" [modifiedModel]="modifiedModel"
+                            (onInit)="onInit($event)"></ngx-monaco-diff-editor>
+
+    <ngx-monaco-editor [options]="options" [model]="model"></ngx-monaco-editor>
   `,
   styles: []
 })
@@ -46,6 +49,19 @@ export class AppComponent {
   modifiedModel: DiffEditorModel = {
     code: 'hello orlando!',
     language: 'text/plain'
+  };
+
+  jsonCode = [
+    '{',
+    '    "p1": "v3",',
+    '    "p2": false',
+    '}'
+  ].join('\n');
+
+  model: NgxEditorModel = {
+    value: this.jsonCode,
+    language: 'json',
+    uri: 'foo.json'
   };
 
   ngOnInit() {

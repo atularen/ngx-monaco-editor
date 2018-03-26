@@ -1,9 +1,10 @@
-import { Component, forwardRef, Inject, NgZone } from '@angular/core';
+import { Component, forwardRef, Inject, Input, NgZone } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 
 import { BaseEditor } from './base-editor';
 import { NGX_MONACO_EDITOR_CONFIG, NgxMonacoEditorConfig } from './config';
+import { NgxEditorModel } from './types';
 
 @Component({
   selector: 'ngx-monaco-editor',
@@ -26,11 +27,19 @@ import { NGX_MONACO_EDITOR_CONFIG, NgxMonacoEditorConfig } from './config';
   }]
 })
 export class EditorComponent extends BaseEditor implements ControlValueAccessor {
-
   private _value: string = '';
 
   propagateChange = (_: any) => {};
   onTouched = () => {};
+
+  @Input('model')
+  set model(model: NgxEditorModel) {
+    this.options.model = model;
+    if (this._editor) {
+      this._editor.dispose();
+      this.initMonaco(this.options);
+    }
+  }
 
   constructor(private zone: NgZone, @Inject(NGX_MONACO_EDITOR_CONFIG) private editorConfig: NgxMonacoEditorConfig) {
     super(editorConfig);
@@ -40,7 +49,7 @@ export class EditorComponent extends BaseEditor implements ControlValueAccessor 
     this._value = value || '';
     // Fix for value change while dispose in process.
     setTimeout(() => {
-      if (this._editor) {
+      if (this._editor && !this.options.model) {
         this._editor.setValue(this._value);
       }
     });
@@ -55,8 +64,17 @@ export class EditorComponent extends BaseEditor implements ControlValueAccessor 
   }
 
   protected initMonaco(options: any): void {
+
+    if(options.model) {
+      options.model = monaco.editor.createModel(options.model.value, options.model.language, options.model.uri);
+    }
+
     this._editor = monaco.editor.create(this._editorContainer.nativeElement, options);
-    this._editor.setValue(this._value);
+
+    if(options.model) {
+      this._editor.setValue(this._value);
+    }
+
     this._editor.onDidChangeModelContent((e: any) => {
       const value = this._editor.getValue();
       this.propagateChange(value);
