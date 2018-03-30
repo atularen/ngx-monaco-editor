@@ -4,7 +4,6 @@ import { NGX_MONACO_EDITOR_CONFIG, NgxMonacoEditorConfig } from './config';
 
 let loadedMonaco: boolean = false;
 let loadPromise: Promise<void>;
-declare const monaco: any;
 declare const require: any;
 
 export abstract class BaseEditor implements AfterViewInit, OnDestroy {
