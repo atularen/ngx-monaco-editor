@@ -173,6 +173,94 @@ export class AppModule {
 }
 ```
 
+### Configure JSON Defaults
+`onMonacoLoad` property of `NgxMonacoEditorConfig` can be used to configure JSON default.
+```typescript
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { MonacoEditorModule, NgxMonacoEditorConfig } from 'ngx-monaco-editor';
+import { AppComponent } from './app.component';
+
+const monacoConfig: NgxMonacoEditorConfig = {
+  onMonacoLoad: () => { 
+    const id = "foo.json";
+    monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+      validate: true,
+      schemas: [{
+        uri: "http://myserver/foo-schema.json",
+        fileMatch: [id],
+        schema: {
+          type: "object",
+          properties: {
+            p1: {
+              enum: [ "v1", "v2"]
+            },
+            p2: {
+              $ref: "http://myserver/bar-schema.json"
+            }
+          }
+        }
+      },{
+        uri: "http://myserver/bar-schema.json",
+        fileMatch: [id],
+        schema: {
+          type: "object",
+          properties: {
+            q1: {
+              enum: [ "x1", "x2"]
+            }
+          }
+        }
+      }]
+    });
+  } 
+};
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    MonacoEditorModule.forRoot(monacoConfig)
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule {
+}
+```
+
+Now pass model config of type `NgxEditorModel` to Editor Component
+```typescript
+@Component({
+  selector: 'app-root',
+  template: `<ngx-monaco-editor [options]="options" [model]="model"></ngx-monaco-editor>`,
+  styles: []
+})
+export class AppComponent {
+  options = {
+    theme: 'vs-dark'
+  };
+  
+  jsonCode = [
+    '{',
+    '    "p1": "v3",',
+    '    "p2": false',
+    '}'
+  ].join('\n');
+
+  model: NgxEditorModel = {
+    value: this.jsonCode,
+    language: 'json',
+    uri: 'foo.json'
+  };
+}
+```
+
 ## Links
 [Monaco Editor](https://github.com/Microsoft/monaco-editor/)<br/>
 [Monaco Editor Options](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditorconstructionoptions.html)
