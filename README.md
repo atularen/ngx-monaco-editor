@@ -153,8 +153,8 @@ import { AppComponent } from './app.component';
 
 const monacoConfig: NgxMonacoEditorConfig = {
   baseUrl: 'app-name/assets', // configure base path for monaco editor
-  defaultOptions: { scrollBeyondLastLine: false }, // pass deafult options to be used
-  onMonacoLoad: () => { console.log((<any>window).monaco); } // here monaco object will be avilable as window.monaco use this function to extend monaco editor functionalities.
+  defaultOptions: { scrollBeyondLastLine: false }, // pass default options to be used
+  onMonacoLoad: () => { console.log((<any>window).monaco); } // here monaco object will be available as window.monaco use this function to extend monaco editor functionalities.
 };
 
 @NgModule({
