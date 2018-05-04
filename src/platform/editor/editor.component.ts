@@ -1,10 +1,11 @@
 import { Component, forwardRef, Inject, Input, NgZone } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { fromEvent } from 'rxjs/observable/fromEvent';
+
 
 import { BaseEditor } from './base-editor';
 import { NGX_MONACO_EDITOR_CONFIG, NgxMonacoEditorConfig } from './config';
 import { NgxEditorModel } from './types';
+import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'ngx-monaco-editor',

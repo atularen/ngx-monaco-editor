@@ -1,9 +1,10 @@
 import { Component, Inject, Input } from '@angular/core';
-import { fromEvent } from 'rxjs/observable/fromEvent';
+
 
 import { BaseEditor } from './base-editor';
 import { NGX_MONACO_EDITOR_CONFIG, NgxMonacoEditorConfig } from './config';
 import { DiffEditorModel } from './types';
+import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'ngx-monaco-diff-editor',
