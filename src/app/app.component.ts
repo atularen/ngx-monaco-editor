@@ -17,6 +17,7 @@ import { DiffEditorModel, NgxEditorModel } from '../platform/editor';
     <pre>{{code | json}}</pre>
 
     <h1>Diff Editor</h1>
+    <button (click)="updateDiffModel()">Update Models</button>
     <ngx-monaco-diff-editor [options]="options" [originalModel]="originalModel" [modifiedModel]="modifiedModel"
                             (onInit)="onInit($event)"></ngx-monaco-diff-editor>
 
@@ -70,12 +71,17 @@ export class AppComponent {
     this.toggleLanguage = !this.toggleLanguage;
     if (this.toggleLanguage) {
       this.code = this.cssCode;
-      this.options = Object.assign({}, this.options, { language: 'css' });
+      this.options = Object.assign({}, this.options, { language: 'java' });
     } else {
       this.code = this.jsCode;
       this.options = Object.assign({}, this.options, { language: 'javascript' });
     }
 
+  }
+
+  updateDiffModel(){
+    this.originalModel = Object.assign({}, this.originalModel, { code: 'abcd' });
+    this.modifiedModel = Object.assign({}, this.originalModel, { code: 'ABCD ef' });
   }
 
   onInit(editor) {

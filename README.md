@@ -1,7 +1,7 @@
 # Monaco Editor Component for Angular 2 and above.
 
  - Angular <= 4: v3.x.x
- - Angular >= 5: v4.x.x
+ - Angular >= 5: v5.x.x
 
 Using this Module you can utilize the Monaco Editor as an Angular Component. Feel free to contribute, raise feature requests and make it better.
 
@@ -153,8 +153,8 @@ import { AppComponent } from './app.component';
 
 const monacoConfig: NgxMonacoEditorConfig = {
   baseUrl: 'app-name/assets', // configure base path for monaco editor
-  defaultOptions: { scrollBeyondLastLine: false }, // pass deafult options to be used
-  onMonacoLoad: () => { console.log((<any>window).monaco); } // here monaco object will be avilable as window.monaco use this function to extend monaco editor functionalities.
+  defaultOptions: { scrollBeyondLastLine: false }, // pass default options to be used
+  onMonacoLoad: () => { console.log((<any>window).monaco); } // here monaco object will be available as window.monaco use this function to extend monaco editor functionality.
 };
 
 @NgModule({
