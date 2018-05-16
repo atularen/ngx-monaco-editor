@@ -1,5 +1,5 @@
 import { AfterViewInit, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { NgxMonacoEditorConfig } from './config';
 
 let loadedMonaco: boolean = false;
