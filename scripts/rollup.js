@@ -33,6 +33,7 @@ gulp.task('rollup-code', '', function() {
     '@angular/material': 'ng.material',
 
     // Rxjs dependencies
+    'rxjs': 'Rxjs',
     'rxjs/Subject': 'Rx',
     'rxjs/add/observable/forkJoin': 'Rx.Observable',
     'rxjs/observable/fromEvent': 'Rx.Observable',

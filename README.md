@@ -1,7 +1,8 @@
 # Monaco Editor Component for Angular 2 and above.
 
  - Angular <= 4: v3.x.x
- - Angular >= 5: v5.x.x
+ - Angular 5: v5.x.x
+ - Angular 6: v6.x.x
 
 Using this Module you can utilize the Monaco Editor as an Angular Component. Feel free to contribute, raise feature requests and make it better.
 
@@ -16,9 +17,9 @@ Install from npm repository:
 npm install ngx-monaco-editor --save
  ```
  
-For angular version 4 and lower use v3.x.x
+For angular version 5 use v5.x.x
 ```
-npm install ngx-monaco-editor@3.0.0 --save
+npm install ngx-monaco-editor@5.0.0 --save
  ```
  
 Add the glob to assets in .angular-cli.json (to make monaco-editor lib available to the app):
