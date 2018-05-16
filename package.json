@@ -45,6 +45,7 @@
     "Atul Kumar <atulaggarwal4288@gmail.com>"
   ],
   "dependencies": {
+    "@angular-devkit/core": "^0.6.1",
     "@angular/common": "^5.1.2",
     "@angular/compiler": "^5.1.2",
     "@angular/core": "^5.1.2",
@@ -53,7 +54,7 @@
     "@angular/platform-browser-dynamic": "^5.1.2",
     "@angular/router": "^5.1.2",
     "core-js": "^2.5.3",
-    "monaco-editor": "^0.10.1",
+    "monaco-editor": "^0.13.1",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
   },
