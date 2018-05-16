@@ -67,13 +67,13 @@ export class EditorComponent extends BaseEditor implements ControlValueAccessor 
 
     const hasModel = !!options.model;
 
-    if(hasModel) {
+    if (hasModel) {
       options.model = monaco.editor.createModel(options.model.value, options.model.language, options.model.uri);
     }
 
     this._editor = monaco.editor.create(this._editorContainer.nativeElement, options);
 
-    if(!hasModel) {
+    if (!hasModel) {
       this._editor.setValue(this._value);
     }
 

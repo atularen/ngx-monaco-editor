@@ -22,8 +22,26 @@ import { DiffEditorModel } from './types';
 })
 export class DiffEditorComponent extends BaseEditor {
 
-  @Input() originalModel: DiffEditorModel;
-  @Input() modifiedModel: DiffEditorModel;
+  _originalModel: DiffEditorModel;
+  _modifiedModel: DiffEditorModel;
+
+  @Input('originalModel')
+  set originalModel(model: DiffEditorModel) {
+    this._originalModel = model;
+    if (this._editor) {
+      this._editor.dispose();
+      this.initMonaco(this.options);
+    }
+  }
+
+  @Input('modifiedModel')
+  set modifiedModel(model: DiffEditorModel) {
+    this._modifiedModel = model;
+    if (this._editor) {
+      this._editor.dispose();
+      this.initMonaco(this.options);
+    }
+  }
 
   constructor(@Inject(NGX_MONACO_EDITOR_CONFIG) private editorConfig: NgxMonacoEditorConfig) {
     super(editorConfig);
@@ -31,15 +49,15 @@ export class DiffEditorComponent extends BaseEditor {
 
   protected initMonaco(options: any): void {
 
-    if (!this.originalModel || !this.modifiedModel) {
+    if (!this._originalModel || !this._modifiedModel) {
       throw new Error('originalModel or modifiedModel not found for ngx-monaco-diff-editor');
     }
 
-    this.originalModel.language = this.originalModel.language || options.language;
-    this.modifiedModel.language = this.modifiedModel.language || options.language;
+    this._originalModel.language = this._originalModel.language || options.language;
+    this._modifiedModel.language = this._modifiedModel.language || options.language;
 
-    let originalModel = monaco.editor.createModel(this.originalModel.code, this.originalModel.language);
-    let modifiedModel = monaco.editor.createModel(this.modifiedModel.code, this.modifiedModel.language);
+    let originalModel = monaco.editor.createModel(this._originalModel.code, this._originalModel.language);
+    let modifiedModel = monaco.editor.createModel(this._modifiedModel.code, this._modifiedModel.language);
 
     this._editorContainer.nativeElement.innerHTML = '';
     this._editor = monaco.editor.createDiffEditor(this._editorContainer.nativeElement, options);
