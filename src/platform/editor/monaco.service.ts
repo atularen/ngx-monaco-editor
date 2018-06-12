@@ -1,4 +1,5 @@
 import { Injectable, Inject } from "@angular/core";
+import { PlatformLocation, Location } from "@angular/common";
 import { NgxMonacoEditorConfig, NGX_MONACO_EDITOR_CONFIG } from './config';
 
 let loadedMonaco: boolean = false;
@@ -10,14 +11,15 @@ export class MonacoService {
 
   private baseHref: string;
 
-  constructor(@Inject(NGX_MONACO_EDITOR_CONFIG) private config: NgxMonacoEditorConfig) {
+  constructor(@Inject(NGX_MONACO_EDITOR_CONFIG) private config: NgxMonacoEditorConfig, platformLocation: PlatformLocation) {
+    this.baseHref = platformLocation.getBaseHrefFromDOM();
   }
 
   loadMonaco(): Promise<void> {
     if (!loadedMonaco) {
       loadedMonaco = true;
       loadPromise = new Promise<void>((resolve: any) => {
-        const baseUrl = this.config.baseUrl || '/assets';
+        const baseUrl = this.config.baseUrl || Location.joinWithSlash(this.baseHref, '/assets');
         if (typeof((<any>window).monaco) === 'object') {
           resolve();
           return;
