@@ -3,10 +3,6 @@ import { Subscription } from 'rxjs';
 import { NgxMonacoEditorConfig } from './config';
 import { MonacoService } from './monaco.service';
 
-let loadedMonaco: boolean = false;
-let loadPromise: Promise<void>;
-declare const require: any;
-
 export abstract class BaseEditor implements AfterViewInit, OnDestroy {
   @ViewChild('editorContainer') _editorContainer: ElementRef;
   @Output() onInit = new EventEmitter<any>();
