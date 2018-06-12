@@ -5,6 +5,7 @@ import { BaseEditor } from './base-editor';
 import { NGX_MONACO_EDITOR_CONFIG, NgxMonacoEditorConfig } from './config';
 import { DiffEditorModel } from './types';
 import { fromEvent } from 'rxjs';
+import { MonacoService } from './monaco.service';
 
 @Component({
   selector: 'ngx-monaco-diff-editor',
@@ -44,8 +45,8 @@ export class DiffEditorComponent extends BaseEditor {
     }
   }
 
-  constructor(@Inject(NGX_MONACO_EDITOR_CONFIG) private editorConfig: NgxMonacoEditorConfig) {
-    super(editorConfig);
+  constructor(monacoService: MonacoService, @Inject(NGX_MONACO_EDITOR_CONFIG) private editorConfig: NgxMonacoEditorConfig) {
+    super(monacoService, editorConfig);
   }
 
   protected initMonaco(options: any): void {

@@ -1,3 +1,4 @@
+import { MonacoService } from './monaco.service';
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 
@@ -16,6 +17,9 @@ import { EditorComponent } from './editor.component';
   exports: [
     EditorComponent,
     DiffEditorComponent
+  ],
+  providers: [
+    MonacoService
   ]
 })
 export class MonacoEditorModule {
