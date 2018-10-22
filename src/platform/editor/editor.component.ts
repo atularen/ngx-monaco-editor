@@ -13,6 +13,7 @@ import { fromEvent } from 'rxjs';
   styles: [`
     :host {
       display: block;
+      height: 100%
     }
 
     .editor-container {
