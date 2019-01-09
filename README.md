@@ -22,7 +22,7 @@ For angular version 5 use v5.x.x
 npm install ngx-monaco-editor@5.0.0 --save
  ```
  
-Add the glob to assets in .angular-cli.json (to make monaco-editor lib available to the app):
+Add the glob to assets in `.angular-cli.json` (to make monaco-editor lib available to the app):
 ```typescript
 {
   "apps": [
@@ -34,6 +34,22 @@ Add the glob to assets in .angular-cli.json (to make monaco-editor lib available
     }
     ...
   ],
+  ...
+}
+ ```
+
+For Angular 7+, add the glob to assets in `angular.json` schema - `projects.[project-name].architect.build`
+```typescript
+{
+  "options": {
+    {
+      "assets": [
+        { "glob": "**/*", "input": "node_modules/ngx-monaco-editor/assets/monaco", "output": "./assets/monaco/" }
+      ],
+      ...
+    }
+    ...
+  },
   ...
 }
  ```
