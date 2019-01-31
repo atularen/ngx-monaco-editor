@@ -118,7 +118,7 @@ Add class to editor tag. (eg. class="my-code-editor")
 Add styling in css/scss file:
 ```scss
 .my-code-editor {
-  .editorContainer {
+  .editor-container {
     height: calc(100vh - 100px);
   }
 }
