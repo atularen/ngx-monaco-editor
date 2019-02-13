@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, NgZone } from '@angular/core';
 
 
 import { BaseEditor } from './base-editor';
@@ -31,7 +31,7 @@ export class DiffEditorComponent extends BaseEditor {
     this._originalModel = model;
     if (this._editor) {
       this._editor.dispose();
-      this.initMonaco(this.options);
+      this.initMonaco(this.options, this.insideNg);
     }
   }
 
@@ -40,15 +40,15 @@ export class DiffEditorComponent extends BaseEditor {
     this._modifiedModel = model;
     if (this._editor) {
       this._editor.dispose();
-      this.initMonaco(this.options);
+      this.initMonaco(this.options, this.insideNg);
     }
   }
 
-  constructor(@Inject(NGX_MONACO_EDITOR_CONFIG) private editorConfig: NgxMonacoEditorConfig) {
+  constructor(private zone: NgZone, @Inject(NGX_MONACO_EDITOR_CONFIG) private editorConfig: NgxMonacoEditorConfig) {
     super(editorConfig);
   }
 
-  protected initMonaco(options: any): void {
+  protected initMonaco(options: any, insideNg: boolean): void {
 
     if (!this._originalModel || !this._modifiedModel) {
       throw new Error('originalModel or modifiedModel not found for ngx-monaco-diff-editor');
@@ -61,7 +61,15 @@ export class DiffEditorComponent extends BaseEditor {
     let modifiedModel = monaco.editor.createModel(this._modifiedModel.code, this._modifiedModel.language);
 
     this._editorContainer.nativeElement.innerHTML = '';
-    this._editor = monaco.editor.createDiffEditor(this._editorContainer.nativeElement, options);
+
+    if (insideNg) {
+      this._editor = monaco.editor.createDiffEditor(this._editorContainer.nativeElement, options);
+    } else {
+      this.zone.runOutsideAngular(() => {
+        this._editor = monaco.editor.createDiffEditor(this._editorContainer.nativeElement, options);
+      })
+    }
+
     this._editor.setModel({
       original: originalModel,
       modified: modifiedModel

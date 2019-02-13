@@ -11,6 +11,7 @@ export abstract class BaseEditor implements AfterViewInit, OnDestroy {
   @Output() onInit = new EventEmitter<any>();
   protected _editor: any;
   private _options: any;
+  private _insideNg: boolean = false;
   protected _windowResizeSubscription: Subscription;
 
   @Input('options')
@@ -18,12 +19,25 @@ export abstract class BaseEditor implements AfterViewInit, OnDestroy {
     this._options = Object.assign({}, this.config.defaultOptions, options);
     if (this._editor) {
       this._editor.dispose();
-      this.initMonaco(options);
+      this.initMonaco(this.options, this.insideNg);
     }
   }
 
   get options(): any {
     return this._options;
+  }
+
+  @Input('insideNg')
+  set insideNg(insideNg: boolean) {
+    this._insideNg = insideNg;
+    if (this._editor) {
+      this._editor.dispose();
+      this.initMonaco(this.options, this.insideNg);
+    }
+  }
+
+  get insideNg(): boolean {
+    return this._insideNg;
   }
 
   constructor(private config: NgxMonacoEditorConfig) {}
@@ -32,7 +46,7 @@ export abstract class BaseEditor implements AfterViewInit, OnDestroy {
     if (loadedMonaco) {
       // Wait until monaco editor is available
       loadPromise.then(() => {
-        this.initMonaco(this.options);
+        this.initMonaco(this.options, this.insideNg);
       });
     } else {
       loadedMonaco = true;
@@ -49,7 +63,7 @@ export abstract class BaseEditor implements AfterViewInit, OnDestroy {
             if (typeof this.config.onMonacoLoad === 'function') {
               this.config.onMonacoLoad();
             }
-            this.initMonaco(this.options);
+            this.initMonaco(this.options, this.insideNg);
             resolve();
           });
         };
@@ -68,7 +82,7 @@ export abstract class BaseEditor implements AfterViewInit, OnDestroy {
     }
   }
 
-  protected abstract initMonaco(options: any): void;
+  protected abstract initMonaco(options: any, insideNg: boolean): void;
 
   ngOnDestroy() {
     if (this._windowResizeSubscription) {
