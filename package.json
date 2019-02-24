@@ -1,6 +1,6 @@
 {
   "name": "ngx-monaco-editor",
-  "version": "2.0.1",
+  "version": "7.0.0",
   "description": "Monaco Code Editor For Angular",
   "keywords": [
     "angular",
@@ -18,7 +18,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build-editor": "npm run copy:readme && npm run copy:typings && ng build editor && npm run copy:types && npm run copy:editor",
-    "npm-publish": "npm run build && bash scripts/npm-publish",
+    "npm-publish": "npm run build-editor && bash scripts/npm-publish",
     "copy:typings": "cp node_modules/monaco-editor/monaco.d.ts projects/editor/src/lib",
     "copy:types": "cp node_modules/monaco-editor/monaco.d.ts dist/editor",
     "copy:readme": "cp -rf README.md projects/editor/",

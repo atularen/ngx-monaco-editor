@@ -3,6 +3,7 @@
  - Angular <= 4: v3.x.x
  - Angular 5: v5.x.x
  - Angular 6: v6.x.x
+ - Angular 7: v7.x.x
 
 Using this Module you can utilize the Monaco Editor as an Angular Component. Feel free to contribute, raise feature requests and make it better.
 
@@ -17,9 +18,9 @@ Install from npm repository:
 npm install ngx-monaco-editor --save
  ```
  
-For angular version 5 use v5.x.x
+For angular version 6 use v6.x.x
 ```
-npm install ngx-monaco-editor@5.0.0 --save
+npm install ngx-monaco-editor@6.0.0 --save
  ```
  
 Add the glob to assets in .angular-cli.json (to make monaco-editor lib available to the app):
@@ -185,32 +186,35 @@ import { MonacoEditorModule, NgxMonacoEditorConfig } from 'ngx-monaco-editor';
 import { AppComponent } from './app.component';
 
 const monacoConfig: NgxMonacoEditorConfig = {
-  onMonacoLoad: () => { 
-    const id = "foo.json";
+  baseUrl: 'assets',
+  defaultOptions: { scrollBeyondLastLine: false },
+  onMonacoLoad: () => {
+    console.log((window as any).monaco);
+    const uri = monaco.Uri.parse('a://b/foo.json');
     monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
       validate: true,
       schemas: [{
-        uri: "http://myserver/foo-schema.json",
-        fileMatch: [id],
+        uri: 'http://myserver/foo-schema.json',
+        fileMatch: [uri.toString()],
         schema: {
-          type: "object",
+          type: 'object',
           properties: {
             p1: {
-              enum: [ "v1", "v2"]
+              enum: ['v1', 'v2']
             },
             p2: {
-              $ref: "http://myserver/bar-schema.json"
+              $ref: 'http://myserver/bar-schema.json'
             }
           }
         }
-      },{
-        uri: "http://myserver/bar-schema.json",
-        fileMatch: [id],
+      }, {
+        uri: 'http://myserver/bar-schema.json',
+        fileMatch: [uri.toString()],
         schema: {
-          type: "object",
+          type: 'object',
           properties: {
             q1: {
-              enum: [ "x1", "x2"]
+              enum: ['x1', 'x2']
             }
           }
         }
@@ -257,7 +261,7 @@ export class AppComponent {
   model: NgxEditorModel = {
     value: this.jsonCode,
     language: 'json',
-    uri: 'foo.json'
+    uri: monaco.Uri.parse('a://b/foo.json')
   };
 }
 ```
