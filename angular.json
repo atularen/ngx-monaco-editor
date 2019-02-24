@@ -3,31 +3,40 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-monaco-editor": {
-      "root": "",
-      "sourceRoot": "src",
+    "editor-tester": {
+      "root": "projects/editor-tester/",
+      "sourceRoot": "projects/editor-tester/src",
       "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "tsConfig": "src/tsconfig.app.json",
-            "polyfills": "src/polyfills.ts",
+            "outputPath": "dist/editor-tester",
+            "index": "projects/editor-tester/src/index.html",
+            "main": "projects/editor-tester/src/main.ts",
+            "polyfills": "projects/editor-tester/src/polyfills.ts",
+            "tsConfig": "projects/editor-tester/tsconfig.app.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "node_modules/monaco-editor/min",
-                "output": "/assets/monaco"
-              }
+              "projects/editor-tester/src/favicon.ico",
+              "projects/editor-tester/src/assets",
+              { "glob": "**/*", "input": "node_modules/monaco-editor/min", "output": "./assets/monaco/" }
             ],
-            "styles": [],
-            "scripts": []
+            "styles": [
+              "projects/editor-tester/src/styles.css"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/editor-tester/src/environments/environment.ts",
+                  "with": "projects/editor-tester/src/environments/environment.prod.ts"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -37,10 +46,11 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "fileReplacements": [
+              "budgets": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
                 }
               ]
             }
@@ -49,46 +59,26 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ngx-monaco-editor:build",
-            "port": 4200,
-            "host": "localhost"
+            "browserTarget": "editor-tester:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ngx-monaco-editor:build:production"
+              "browserTarget": "editor-tester:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngx-monaco-editor:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "src/test.ts",
-            "karmaConfig": "./karma.conf.js",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.spec.json",
-            "scripts": [],
-            "styles": [],
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "node_modules/monaco-editor/min",
-                "output": "/assets/monaco"
-              }
-            ]
+            "browserTarget": "editor-tester:build"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
+              "projects/editor-tester/tsconfig.app.json",
+              "projects/editor-tester/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -97,23 +87,25 @@
         }
       }
     },
-    "ngx-monaco-editor-e2e": {
-      "root": "",
-      "sourceRoot": "",
-      "projectType": "application",
+    "editor": {
+      "root": "projects/editor",
+      "sourceRoot": "projects/editor/src",
+      "projectType": "library",
+      "prefix": "ngx-monaco",
       "architect": {
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "ngx-monaco-editor:serve"
+            "tsConfig": "projects/editor/tsconfig.lib.json",
+            "project": "projects/editor/ng-package.json"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "e2e/tsconfig.e2e.json"
+              "projects/editor/tsconfig.lib.json",
+              "projects/editor/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -123,33 +115,5 @@
       }
     }
   },
-  "defaultProject": "ngx-monaco-editor",
-  "schematics": {
-    "@schematics/angular:class": {
-      "spec": false
-    },
-    "@schematics/angular:component": {
-      "spec": false,
-      "inlineStyle": true,
-      "inlineTemplate": true,
-      "prefix": "app",
-      "styleext": "css"
-    },
-    "@schematics/angular:directive": {
-      "spec": false,
-      "prefix": "app"
-    },
-    "@schematics/angular:guard": {
-      "spec": false
-    },
-    "@schematics/angular:module": {
-      "spec": false
-    },
-    "@schematics/angular:pipe": {
-      "spec": false
-    },
-    "@schematics/angular:service": {
-      "spec": false
-    }
-  }
+  "defaultProject": "ngx-monaco-editor"
 }
