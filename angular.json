@@ -1,0 +1,119 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "editor-tester": {
+      "root": "projects/editor-tester/",
+      "sourceRoot": "projects/editor-tester/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/editor-tester",
+            "index": "projects/editor-tester/src/index.html",
+            "main": "projects/editor-tester/src/main.ts",
+            "polyfills": "projects/editor-tester/src/polyfills.ts",
+            "tsConfig": "projects/editor-tester/tsconfig.app.json",
+            "assets": [
+              "projects/editor-tester/src/favicon.ico",
+              "projects/editor-tester/src/assets",
+              { "glob": "**/*", "input": "node_modules/monaco-editor/min", "output": "./assets/monaco/" }
+            ],
+            "styles": [
+              "projects/editor-tester/src/styles.css"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/editor-tester/src/environments/environment.ts",
+                  "with": "projects/editor-tester/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "editor-tester:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "editor-tester:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "editor-tester:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/editor-tester/tsconfig.app.json",
+              "projects/editor-tester/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "editor": {
+      "root": "projects/editor",
+      "sourceRoot": "projects/editor/src",
+      "projectType": "library",
+      "prefix": "ngx-monaco",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/editor/tsconfig.lib.json",
+            "project": "projects/editor/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/editor/tsconfig.lib.json",
+              "projects/editor/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "ngx-monaco-editor"
+}

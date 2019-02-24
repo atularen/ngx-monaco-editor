@@ -3,7 +3,7 @@
 #login into private registry
 npm login
 
-npm publish ./deploy/platform/editor/ --access=public
+npm publish ./dist/editor/ --access=public
 
 #logout when finished
 npm logout
