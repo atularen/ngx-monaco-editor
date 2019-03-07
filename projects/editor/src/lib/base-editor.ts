@@ -37,7 +37,7 @@ export abstract class BaseEditor implements AfterViewInit, OnDestroy {
     } else {
       loadedMonaco = true;
       loadPromise = new Promise<void>((resolve: any) => {
-        const baseUrl = this.config.baseUrl || '/assets';
+        const baseUrl = this.config.baseUrl || './assets';
         if (typeof ((<any>window).monaco) === 'object') {
           resolve();
           return;
