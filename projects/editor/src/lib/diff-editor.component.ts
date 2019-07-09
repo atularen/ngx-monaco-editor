@@ -72,7 +72,8 @@ export class DiffEditorComponent extends BaseEditor {
     if (this._windowResizeSubscription) {
       this._windowResizeSubscription.unsubscribe();
     }
-    this._windowResizeSubscription = fromEvent(window, 'resize').subscribe(() => this._editor.layout());
+    this._windowResizeSubscription = fromEvent(window, 'resize').subscribe(
+      () => this._editor.layout(this._editorContainer.nativeElement));
     this.onInit.emit(this._editor);
   }
 
