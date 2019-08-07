@@ -22,7 +22,7 @@
     "copy:typings": "cp node_modules/monaco-editor/monaco.d.ts projects/editor/src/lib",
     "copy:types": "cp node_modules/monaco-editor/monaco.d.ts dist/editor",
     "copy:readme": "cp -rf README.md projects/editor/",
-    "copy:editor": "mkdir ./dist/editor/assets && cp -rf node_modules/monaco-editor/min dist/editor/assets/monaco"
+    "copy:editor": "mkdir ./dist/editor/assets && cp -rf node_modules/monaco-editor/min dist/editor/assets/monaco/min && cp -rf node_modules/monaco-editor/min-maps dist/editor/assets/monaco/min-maps"
   },
   "private": false,
   "repository": {

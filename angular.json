@@ -21,11 +21,18 @@
             "assets": [
               "projects/editor-tester/src/favicon.ico",
               "projects/editor-tester/src/assets",
-              { "glob": "**/*", "input": "node_modules/monaco-editor/min", "output": "./assets/monaco/" }
+              {
+                "glob": "**/*",
+                "input": "node_modules/monaco-editor/min",
+                "output": "./assets/monaco/min"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/monaco-editor/min-maps",
+                "output": "./assets/monaco/min-maps"
+              }
             ],
-            "styles": [
-              "projects/editor-tester/src/styles.css"
-            ],
+            "styles": ["projects/editor-tester/src/styles.css"],
             "scripts": [],
             "es5BrowserSupport": true
           },
@@ -80,9 +87,7 @@
               "projects/editor-tester/tsconfig.app.json",
               "projects/editor-tester/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -107,9 +112,7 @@
               "projects/editor/tsconfig.lib.json",
               "projects/editor/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }

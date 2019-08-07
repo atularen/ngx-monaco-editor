@@ -53,7 +53,7 @@ export abstract class BaseEditor implements AfterViewInit, OnDestroy {
         const onGotAmdLoader: any = () => {
           // Load monaco
           (<any>window).require.config({
-            paths: { vs: `${baseUrl}/monaco/vs` }
+            paths: { vs: `${baseUrl}/monaco/min/vs` }
           });
           (<any>window).require(["vs/editor/editor.main"], () => {
             if (typeof this.config.onMonacoLoad === "function") {
@@ -70,7 +70,7 @@ export abstract class BaseEditor implements AfterViewInit, OnDestroy {
             "script"
           );
           loaderScript.type = "text/javascript";
-          loaderScript.src = `${baseUrl}/monaco/vs/loader.js`;
+          loaderScript.src = `${baseUrl}/monaco/min/vs/loader.js`;
           loaderScript.addEventListener("load", onGotAmdLoader);
           document.body.appendChild(loaderScript);
         } else {
