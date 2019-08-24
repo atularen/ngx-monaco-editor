@@ -1,6 +1,6 @@
 {
   "name": "ngx-monaco-editor",
-  "version": "7.0.0",
+  "version": "8.0.0",
   "description": "Monaco Code Editor For Angular",
   "keywords": [
     "angular",
@@ -14,7 +14,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --project=editor-tester --base-href=editor-tester",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build-editor": "npm run copy:readme && npm run copy:typings && ng build editor && npm run copy:types && npm run copy:editor",
@@ -37,33 +37,32 @@
     "Atul Kumar <atulaggarwal4288@gmail.com>"
   ],
   "dependencies": {
-    "@angular/animations": "~7.2.0",
-    "@angular/common": "~7.2.0",
-    "@angular/compiler": "~7.2.0",
-    "@angular/core": "~7.2.0",
-    "@angular/forms": "~7.2.0",
-    "@angular/platform-browser": "~7.2.0",
-    "@angular/platform-browser-dynamic": "~7.2.0",
-    "@angular/router": "~7.2.0",
-    "core-js": "^2.5.4",
-    "monaco-editor": "^0.15.6",
-    "rxjs": "~6.3.3",
-    "tslib": "^1.9.0",
-    "zone.js": "~0.8.26"
+    "@angular/animations": "~8.2.3",
+    "@angular/common": "~8.2.3",
+    "@angular/compiler": "~8.2.3",
+    "@angular/core": "~8.2.3",
+    "@angular/forms": "~8.2.3",
+    "@angular/platform-browser": "~8.2.3",
+    "@angular/platform-browser-dynamic": "~8.2.3",
+    "@angular/router": "~8.2.3",
+    "core-js": "^3.2.1",
+    "monaco-editor": "^0.17.1",
+    "rxjs": "~6.5.2",
+    "tslib": "^1.10.0",
+    "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.13.0",
-    "@angular-devkit/build-ng-packagr": "~0.13.0",
-    "@angular/cli": "~7.3.3",
-    "@angular/compiler-cli": "~7.2.0",
-    "@angular/language-service": "~7.2.0",
-    "@types/node": "~8.9.4",
-    "codelyzer": "~4.5.0",
-    "ng-packagr": "^4.2.0",
-    "ts-node": "~7.0.0",
-    "tsickle": ">=0.34.0",
-    "tslib": "^1.9.0",
-    "tslint": "~5.11.0",
-    "typescript": "~3.2.2"
+    "@angular-devkit/build-angular": "~0.803.0",
+    "@angular-devkit/build-ng-packagr": "~0.803.0",
+    "@angular/cli": "~8.3.0",
+    "@angular/compiler-cli": "~8.2.3",
+    "@angular/language-service": "~8.2.3",
+    "@types/node": "~12.7.2",
+    "codelyzer": "~5.1.0",
+    "ng-packagr": "^5.5.0",
+    "ts-node": "~8.3.0",
+    "tsickle": "0.37.0",
+    "tslint": "~5.19.0",
+    "typescript": "~3.5.3"
   }
 }

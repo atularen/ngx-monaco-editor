@@ -11,7 +11,10 @@ import { DiffEditorModel, NgxEditorModel } from 'editor';
     <button (click)="code = undefined; codeInput=undefined">Set Value To undefined</button>
     <button (click)="showMultiple = !showMultiple">{{showMultiple ? 'Hide' : 'Show'}} Multiple Editor</button>
 
-    <ngx-monaco-editor [options]="options" [(ngModel)]="code" (onInit)="onInit($event)"></ngx-monaco-editor>
+    <div style="height: 100px">
+        <ngx-monaco-editor style="height: 100%" [options]="options" [(ngModel)]="code" (onInit)="onInit($event)"></ngx-monaco-editor>
+    </div>
+    
     <ngx-monaco-editor *ngIf="showMultiple" [options]="options" [(ngModel)]="code"></ngx-monaco-editor>
 
     <pre>{{code | json}}</pre>

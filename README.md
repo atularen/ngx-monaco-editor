@@ -4,6 +4,7 @@
  - Angular 5: v5.x.x
  - Angular 6: v6.x.x
  - Angular 7: v7.x.x
+ - Angular 8: v8.x.x
 
 Using this Module you can utilize the Monaco Editor as an Angular Component. Feel free to contribute, raise feature requests and make it better.
 
@@ -23,23 +24,7 @@ For angular version 6 use v6.x.x
 npm install ngx-monaco-editor@6.0.0 --save
  ```
  
-Add the glob to assets in `.angular-cli.json` (to make monaco-editor lib available to the app):
-```typescript
-{
-  "apps": [
-    {
-      "assets": [
-        { "glob": "**/*", "input": "../node_modules/ngx-monaco-editor/assets/monaco", "output": "./assets/monaco/" }
-      ],
-      ...
-    }
-    ...
-  ],
-  ...
-}
- ```
-
-For Angular 7+, add the glob to assets in `angular.json` schema - `projects.[project-name].architect.build`
+Add the glob to assets in `.angular-cli.json` schema - `projects.[project-name].architect.build` (to make monaco-editor lib available to the app):
 ```typescript
 {
   "options": {
@@ -51,6 +36,23 @@ For Angular 7+, add the glob to assets in `angular.json` schema - `projects.[pro
     }
     ...
   },
+  ...
+}
+ ```
+
+
+For Angular 6 and below, add the glob to assets in `angular.json`
+```typescript
+{
+  "apps": [
+    {
+      "assets": [
+        { "glob": "**/*", "input": "../node_modules/ngx-monaco-editor/assets/monaco", "output": "./assets/monaco/" }
+      ],
+      ...
+    }
+    ...
+  ],
   ...
 }
  ```
@@ -128,6 +130,12 @@ export class AppComponent {
 ```
 
 ### Styling
+To match height of container element add height: 100% and wrap in container
+```html
+<div style="height: 500px">
+    <ngx-monaco-editor style="height: 100%" [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+</div>
+```
 Add class to editor tag. (eg. class="my-code-editor")
 ```html
 <ngx-monaco-editor class="my-code-editor" [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
@@ -170,7 +178,7 @@ import { MonacoEditorModule, NgxMonacoEditorConfig } from 'ngx-monaco-editor';
 import { AppComponent } from './app.component';
 
 const monacoConfig: NgxMonacoEditorConfig = {
-  baseUrl: 'app-name/assets', // configure base path for monaco editor
+  baseUrl: 'app-name/assets', // configure base path for monaco editor default: './assets'
   defaultOptions: { scrollBeyondLastLine: false }, // pass default options to be used
   onMonacoLoad: () => { console.log((<any>window).monaco); } // here monaco object will be available as window.monaco use this function to extend monaco editor functionalities.
 };
