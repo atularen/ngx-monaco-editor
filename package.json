@@ -1,6 +1,6 @@
 {
   "name": "ngx-monaco-editor",
-  "version": "8.0.0",
+  "version": "8.1.0",
   "description": "Monaco Code Editor For Angular",
   "keywords": [
     "angular",
@@ -46,7 +46,7 @@
     "@angular/platform-browser-dynamic": "~8.2.3",
     "@angular/router": "~8.2.3",
     "core-js": "^3.2.1",
-    "monaco-editor": "^0.17.1",
+    "monaco-editor": "^0.18.1",
     "rxjs": "~6.5.2",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
