@@ -23,7 +23,7 @@ export abstract class BaseEditor implements AfterViewInit, OnDestroy {
   }
 
   get options(): any {
-    return this._options;
+    return this._options || this.config.defaultOptions;
   }
 
   constructor(private config: NgxMonacoEditorConfig) {}
