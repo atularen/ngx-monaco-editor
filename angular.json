@@ -115,5 +115,5 @@
       }
     }
   },
-  "defaultProject": "ngx-monaco-editor"
+  "defaultProject": "editor-tester"
 }
