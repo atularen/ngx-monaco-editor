@@ -1,6 +1,6 @@
 {
   "name": "ngx-monaco-editor",
-  "version": "8.1.0",
+  "version": "8.1.1",
   "private": false,
   "description": "Monaco Code Editor for Angular",
   "keywords": [

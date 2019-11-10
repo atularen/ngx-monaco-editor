@@ -19,7 +19,7 @@ import { EditorComponent } from './editor.component';
   ]
 })
 export class MonacoEditorModule {
-  public static forRoot(config: NgxMonacoEditorConfig = {}): ModuleWithProviders {
+  public static forRoot(config: NgxMonacoEditorConfig = {}): ModuleWithProviders<MonacoEditorModule> {
     return {
       ngModule: MonacoEditorModule,
       providers: [

@@ -29,6 +29,7 @@ import { DiffEditorModel, NgxEditorModel } from 'editor';
   styles: []
 })
 export class AppComponent implements OnInit {
+  codeInput = 'Sample Code';
   editor: any;
   diffEditor: any;
   showMultiple = false;

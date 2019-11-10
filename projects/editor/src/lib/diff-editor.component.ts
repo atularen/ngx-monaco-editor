@@ -25,6 +25,19 @@ export class DiffEditorComponent extends BaseEditor {
   _originalModel: DiffEditorModel;
   _modifiedModel: DiffEditorModel;
 
+  @Input('options')
+  set options(options: any) {
+    this._options = Object.assign({}, this.config.defaultOptions, options);
+    if (this._editor) {
+      this._editor.dispose();
+      this.initMonaco(options);
+    }
+  }
+
+  get options(): any {
+    return this._options;
+  }
+
   @Input('originalModel')
   set originalModel(model: DiffEditorModel) {
     this._originalModel = model;

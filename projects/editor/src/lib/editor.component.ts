@@ -32,6 +32,19 @@ export class EditorComponent extends BaseEditor implements ControlValueAccessor 
   propagateChange = (_: any) => {};
   onTouched = () => {};
 
+  @Input('options')
+  set options(options: any) {
+    this._options = Object.assign({}, this.config.defaultOptions, options);
+    if (this._editor) {
+      this._editor.dispose();
+      this.initMonaco(options);
+    }
+  }
+
+  get options(): any {
+    return this._options;
+  }
+
   @Input('model')
   set model(model: NgxEditorModel) {
     this.options.model = model;

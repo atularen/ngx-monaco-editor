@@ -10,29 +10,16 @@ export abstract class BaseEditor implements AfterViewInit, OnDestroy {
   @ViewChild('editorContainer', { static: true }) _editorContainer: ElementRef;
   @Output() onInit = new EventEmitter<any>();
   protected _editor: any;
-  private _options: any;
+  protected _options: any;
   protected _windowResizeSubscription: Subscription;
 
-  @Input('options')
-  set options(options: any) {
-    this._options = Object.assign({}, this.config.defaultOptions, options);
-    if (this._editor) {
-      this._editor.dispose();
-      this.initMonaco(options);
-    }
-  }
-
-  get options(): any {
-    return this._options;
-  }
-
-  constructor(private config: NgxMonacoEditorConfig) {}
+  constructor(protected config: NgxMonacoEditorConfig) {}
 
   ngAfterViewInit(): void {
     if (loadedMonaco) {
       // Wait until monaco editor is available
       loadPromise.then(() => {
-        this.initMonaco(this.options);
+        this.initMonaco(this._options);
       });
     } else {
       loadedMonaco = true;
@@ -49,7 +36,7 @@ export abstract class BaseEditor implements AfterViewInit, OnDestroy {
             if (typeof this.config.onMonacoLoad === 'function') {
               this.config.onMonacoLoad();
             }
-            this.initMonaco(this.options);
+            this.initMonaco(this._options);
             resolve();
           });
         };
