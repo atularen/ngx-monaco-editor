@@ -98,9 +98,12 @@ export class EditorComponent extends BaseEditor implements ControlValueAccessor 
 
     this._editor.onDidChangeModelContent((e: any) => {
       const value = this._editor.getValue();
-      this.propagateChange(value);
+      
       // value is not propagated to parent when executing outside zone.
-      this.zone.run(() => this._value = value);
+      this.zone.run(() => {
+        this.propagateChange(value);
+        this._value = value;
+      });
     });
 
     this._editor.onDidBlurEditorWidget(() => {
