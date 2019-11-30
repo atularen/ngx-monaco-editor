@@ -98,7 +98,7 @@ export class AppComponent {
 ```
 Include editor in html with options and ngModel bindings.(eg: app.component.html)
 ```html
-<ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+<ngx-monaco-editor [options]="editorOptions" [model]="code"></ngx-monaco-editor>
 ```
 
 Include diff-editor in html with options.(eg: app.component.html)
@@ -133,12 +133,12 @@ export class AppComponent {
 To match height of container element add height: 100% and wrap in container
 ```html
 <div style="height: 500px">
-    <ngx-monaco-editor style="height: 100%" [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+    <ngx-monaco-editor style="height: 100%" [options]="editorOptions" [model]="code"></ngx-monaco-editor>
 </div>
 ```
 Add class to editor tag. (eg. class="my-code-editor")
 ```html
-<ngx-monaco-editor class="my-code-editor" [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+<ngx-monaco-editor class="my-code-editor" [options]="editorOptions" [model]="code"></ngx-monaco-editor>
 ```
 Add styling in css/scss file:
 ```scss
@@ -153,7 +153,7 @@ Set automaticLayout option to adjust editor size dynamically. Recommended when u
 ### Events
 Output event (onInit) expose editor instance that can be used for performing custom operations on the editor. 
 ```html
-<ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code" (onInit)="onInit($event)"></ngx-monaco-editor>
+<ngx-monaco-editor [options]="editorOptions" [model]="code" (onInit)="onInit($event)"></ngx-monaco-editor>
 ```
 
 ```typescript
