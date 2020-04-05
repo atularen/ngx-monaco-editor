@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/editor-tester",
             "index": "projects/editor-tester/src/index.html",
             "main": "projects/editor-tester/src/main.ts",
@@ -21,7 +22,11 @@
             "assets": [
               "projects/editor-tester/src/favicon.ico",
               "projects/editor-tester/src/assets",
-              { "glob": "**/*", "input": "node_modules/monaco-editor/min", "output": "./assets/monaco/" }
+              {
+                "glob": "**/*",
+                "input": "node_modules/monaco-editor/min",
+                "output": "./assets/monaco/"
+              }
             ],
             "styles": [
               "projects/editor-tester/src/styles.css"
@@ -51,6 +56,10 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
               ]
             }
@@ -88,9 +97,9 @@
       }
     },
     "editor": {
+      "projectType": "library",
       "root": "projects/editor",
       "sourceRoot": "projects/editor/src",
-      "projectType": "library",
       "prefix": "ngx-monaco",
       "architect": {
         "build": {
@@ -98,6 +107,11 @@
           "options": {
             "tsConfig": "projects/editor/tsconfig.lib.json",
             "project": "projects/editor/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/editor/tsconfig.lib.prod.json"
+            }
           }
         },
         "lint": {
