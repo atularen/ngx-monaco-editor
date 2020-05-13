@@ -48,7 +48,7 @@ For Angular 6 and below, add the glob to assets in `angular.json`
   "apps": [
     {
       "assets": [
-        { "glob": "**/*", "input": "../node_modules/ngx-monaco-editor/assets/monaco", "output": "./assets/monaco/" }
+        { "glob": "**/*", "input": "node_modules/ngx-monaco-editor/assets/monaco", "output": "./assets/monaco/" }
       ],
       ...
     }
