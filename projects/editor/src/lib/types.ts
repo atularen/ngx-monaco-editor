@@ -1,4 +1,4 @@
-/// <reference path="monaco.d.ts" />
+// <reference path="monaco.d.ts" />
 export interface DiffEditorModel {
     code: string;
     language: string;

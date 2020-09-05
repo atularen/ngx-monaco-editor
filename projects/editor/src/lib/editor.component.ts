@@ -6,6 +6,7 @@ import { BaseEditor } from './base-editor';
 import { NGX_MONACO_EDITOR_CONFIG, NgxMonacoEditorConfig } from './config';
 import { NgxEditorModel } from './types';
 
+declare var monaco: any;
 @Component({
   selector: 'ngx-monaco-editor',
   template: '<div class="editor-container" #editorContainer></div>',
@@ -98,7 +99,7 @@ export class EditorComponent extends BaseEditor implements ControlValueAccessor 
 
     this._editor.onDidChangeModelContent((e: any) => {
       const value = this._editor.getValue();
-      
+
       // value is not propagated to parent when executing outside zone.
       this.zone.run(() => {
         this.propagateChange(value);

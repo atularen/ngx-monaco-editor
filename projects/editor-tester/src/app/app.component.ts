@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DiffEditorModel, NgxEditorModel } from 'editor';
+import { DiffEditorModel, NgxEditorModel } from '../../../editor/src/lib/types';
 
+declare var monaco: any;
 @Component({
   selector: 'app-root',
   template: `
@@ -14,7 +15,7 @@ import { DiffEditorModel, NgxEditorModel } from 'editor';
     <div style="height: 100px">
         <ngx-monaco-editor style="height: 100%" [options]="options" [(ngModel)]="code" (onInit)="onInit($event)"></ngx-monaco-editor>
     </div>
-    
+
     <ngx-monaco-editor *ngIf="showMultiple" [options]="options" [(ngModel)]="code"></ngx-monaco-editor>
 
     <pre>{{code | json}}</pre>
