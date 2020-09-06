@@ -6,19 +6,21 @@ import { BaseEditor } from './base-editor';
 import { NGX_MONACO_EDITOR_CONFIG, NgxMonacoEditorConfig } from './config';
 import { NgxEditorModel } from './types';
 
+declare var monaco: any;
+
 @Component({
   selector: 'ngx-monaco-editor',
   template: '<div class="editor-container" #editorContainer></div>',
   styles: [`
-    :host {
-      display: block;
-      height: 200px;
-    }
+      :host {
+          display: block;
+          height: 200px;
+      }
 
-    .editor-container {
-      width: 100%;
-      height: 98%;
-    }
+      .editor-container {
+          width: 100%;
+          height: 98%;
+      }
   `],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
@@ -82,7 +84,7 @@ export class EditorComponent extends BaseEditor implements ControlValueAccessor 
 
     if (hasModel) {
       const model = monaco.editor.getModel(options.model.uri || '');
-      if(model) {
+      if (model) {
         options.model = model;
         options.model.setValue(this._value);
       } else {
@@ -98,7 +100,7 @@ export class EditorComponent extends BaseEditor implements ControlValueAccessor 
 
     this._editor.onDidChangeModelContent((e: any) => {
       const value = this._editor.getValue();
-      
+
       // value is not propagated to parent when executing outside zone.
       this.zone.run(() => {
         this.propagateChange(value);

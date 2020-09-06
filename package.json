@@ -1,6 +1,6 @@
 {
   "name": "ngx-monaco-editor",
-  "version": "9.0.0",
+  "version": "10.0.0-beta.1",
   "description": "Monaco Code Editor For Angular",
   "keywords": [
     "angular",
@@ -18,12 +18,9 @@
     "build:prod": "ng build --prod --project=editor-tester --base-href=editor-tester",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-editor": "npm run copy:readme && npm run copy:typings && ng build editor --prod && npm run copy:types && npm run copy:editor",
-    "npm-publish": "npm run build-editor && bash scripts/npm-publish",
-    "copy:typings": "cp node_modules/monaco-editor/monaco.d.ts projects/editor/src/lib",
-    "copy:types": "cp node_modules/monaco-editor/monaco.d.ts dist/editor",
-    "copy:readme": "cp -rf README.md projects/editor/",
-    "copy:editor": "mkdir ./dist/editor/assets && cp -rf node_modules/monaco-editor/min dist/editor/assets/monaco"
+    "build-editor": "npm run copy:readme && ng build editor --prod",
+    "npm-publish": "npm run build-editor && bash npm-publish",
+    "copy:readme": "cp -rf README.md projects/editor/"
   },
   "private": false,
   "repository": {
@@ -38,31 +35,29 @@
     "Atul Kumar <atulaggarwal4288@gmail.com>"
   ],
   "dependencies": {
-    "@angular/animations": "~9.0.6",
-    "@angular/common": "~9.0.6",
-    "@angular/compiler": "~9.0.6",
-    "@angular/core": "~9.0.6",
-    "@angular/forms": "~9.0.6",
-    "@angular/platform-browser": "~9.0.6",
-    "@angular/platform-browser-dynamic": "~9.0.6",
-    "@angular/router": "~9.0.6",
-    "core-js": "^3.2.1",
+    "@angular/animations": "~10.1.0",
+    "@angular/common": "~10.1.0",
+    "@angular/compiler": "~10.1.0",
+    "@angular/core": "~10.1.0",
+    "@angular/forms": "~10.1.0",
+    "@angular/platform-browser": "~10.1.0",
+    "@angular/platform-browser-dynamic": "~10.1.0",
+    "@angular/router": "~10.1.0",
     "monaco-editor": "^0.20.0",
-    "rxjs": "~6.5.3",
-    "tslib": "^1.10.0",
+    "rxjs": "~6.6.0",
+    "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.900.6",
-    "@angular-devkit/build-ng-packagr": "~0.900.6",
-    "@angular/cli": "~9.0.6",
-    "@angular/compiler-cli": "~9.0.6",
-    "@angular/language-service": "~9.0.6",
+    "@angular-devkit/build-angular": "~0.1001.0",
+    "@angular/cli": "~10.1.0",
+    "@angular/compiler-cli": "~10.1.0",
+    "@angular/language-service": "~10.1.0",
     "@types/node": "^12.11.1",
-    "codelyzer": "^5.1.2",
-    "ng-packagr": "^9.0.0",
+    "codelyzer": "^6.0.0",
+    "ng-packagr": "^10.1.0",
     "ts-node": "~8.3.0",
-    "tslint": "~5.19.0",
-    "typescript": "~3.7.5"
+    "tslint": "~6.1.0",
+    "typescript": "~4.0.2"
   }
 }

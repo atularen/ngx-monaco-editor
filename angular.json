@@ -25,14 +25,13 @@
               {
                 "glob": "**/*",
                 "input": "node_modules/monaco-editor/min",
-                "output": "./assets/monaco/"
+                "output": "./assets/"
               }
             ],
             "styles": [
               "projects/editor-tester/src/styles.css"
             ],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -103,7 +102,7 @@
       "prefix": "ngx-monaco",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/editor/tsconfig.lib.json",
             "project": "projects/editor/ng-package.json"

@@ -6,6 +6,7 @@
  - Angular 7: v7.x.x
  - Angular 8: v8.x.x
  - Angular 9: v9.x.x
+ - Angular 10: v10.x.x
 
 Using this Module you can utilize the Monaco Editor as an Angular Component. Feel free to contribute, raise feature requests and make it better.
 

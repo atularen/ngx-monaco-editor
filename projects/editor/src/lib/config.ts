@@ -4,6 +4,6 @@ export const NGX_MONACO_EDITOR_CONFIG = new InjectionToken('NGX_MONACO_EDITOR_CO
 
 export interface NgxMonacoEditorConfig {
   baseUrl?: string;
-  defaultOptions?: { [key: string]: any; },
+  defaultOptions?: { [key: string]: any; };
   onMonacoLoad?: Function;
 }

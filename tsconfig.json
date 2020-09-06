@@ -5,24 +5,18 @@
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
+    "downlevelIteration": true,
     "experimentalDecorators": true,
+    "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es5",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
+    "target": "es2015",
+    "module": "es2020",
     "lib": [
       "es2018",
       "dom"
     ],
     "paths": {
       "editor": [
-        "dist/editor"
-      ],
-      "editor/*": [
         "dist/editor/editor",
         "dist/editor"
       ]
