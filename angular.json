@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "editor-tester"
+  "defaultProject": "editor-tester",
+  "cli": {
+    "analytics": false
+  }
 }

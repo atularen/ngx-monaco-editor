@@ -1,7 +1,7 @@
 {
-  "name": "ngx-monaco-editor",
+  "name": "@sentinel-one/ngx-monaco-editor",
   "version": "9.0.0",
-  "description": "Monaco Code Editor For Angular",
+  "description": "Monaco Code Editor For Angular (ngx-monaco-editor Fork)",
   "keywords": [
     "angular",
     "monaco",
@@ -28,10 +28,10 @@
   "private": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/atularen/ngx-monaco-editor.git"
+    "url": "https://github.com/Sentinel-One/ngx-monaco-editor.git"
   },
   "bugs": {
-    "url": "https://github.com/atularen/ngx-monaco-editor/issues"
+    "url": "https://github.com/Sentinel-One/ngx-monaco-editor/issues"
   },
   "author": "Atul Kumar",
   "contributors": [
