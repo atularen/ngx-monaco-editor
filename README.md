@@ -1,8 +1,12 @@
-A maintained version of the ngx-monaco-editor wrapper 
+# Monaco Editor Component for Angular 2 and above.
 
-# Monaco Editor Component for Angular
- 
-- Angular 9 and above 
+- Angular <= 4: v3.x.x
+- Angular 5: v5.x.x
+- Angular 6: v6.x.x
+- Angular 7: v7.x.x
+- Angular 8: v8.x.x
+- Angular 9: v9.x.x
+- Angular 11: v11.x.x
 
 Using this Module you can utilize the Monaco Editor as an Angular Component. Feel free to contribute, raise feature requests and make it better.
 
@@ -16,7 +20,12 @@ Install from npm repository:
 ```
 npm install ngx-monaco-editor --save
  ```
- 
+
+For angular version 6 use v6.x.x
+```
+npm install ngx-monaco-editor@6.0.0 --save
+ ```
+
 Add the glob to assets in `.angular-cli.json` schema - `projects.[project-name].architect.build` (to make monaco-editor lib available to the app):
 ```typescript
 {
@@ -33,8 +42,25 @@ Add the glob to assets in `.angular-cli.json` schema - `projects.[project-name].
 }
  ```
 
+
+For Angular 6 and below, add the glob to assets in `angular.json`
+```typescript
+{
+  "apps": [
+    {
+      "assets": [
+        { "glob": "**/*", "input": "../node_modules/ngx-monaco-editor/assets/monaco", "output": "./assets/monaco/" }
+      ],
+      ...
+    }
+    ...
+  ],
+  ...
+}
+ ```
+
 ### Sample
-Include MonacoEditorModule in Main Module and Feature Modules where you want to use the editor component.(eg: app.module.ts): 
+Include MonacoEditorModule in Main Module and Feature Modules where you want to use the editor component.(eg: app.module.ts):
 ```typescript
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -127,7 +153,7 @@ Add styling in css/scss file:
 Set automaticLayout option to adjust editor size dynamically. Recommended when using in modal dialog or tabs where editor is not visible initially.
 
 ### Events
-Output event (onInit) expose editor instance that can be used for performing custom operations on the editor. 
+Output event (onInit) expose editor instance that can be used for performing custom operations on the editor.
 ```html
 <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code" (onInit)="onInit($event)"></ngx-monaco-editor>
 ```
@@ -276,8 +302,5 @@ export class AppComponent {
 [Monaco Editor Options](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditorconstructionoptions.html)
 
 ## License
-MIT 
 
-Credit:
-[Atul Kumar](https://github.com/atularen)
-
+MIT © [Atul Kumar](https://github.com/atularen)

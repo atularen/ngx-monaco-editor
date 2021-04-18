@@ -1,6 +1,6 @@
 {
   "name": "@sentinel-one/ngx-monaco-editor",
-  "version": "9.0.0",
+  "version": "11.0.0",
   "description": "Monaco Code Editor For Angular (ngx-monaco-editor Fork)",
   "keywords": [
     "angular",
