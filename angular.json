@@ -31,8 +31,7 @@
             "styles": [
               "projects/editor-tester/src/styles.css"
             ],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "scripts": []
           },
           "configurations": {
             "production": {
