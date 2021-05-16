@@ -6,7 +6,8 @@
  - Angular 7: v7.x.x
  - Angular 8: v8.x.x
  - Angular 9: v9.x.x
- - Angular 10: v10.x.x
+ - Angular 10: v10.x.x 
+ - Angular 12: v12.x.x
 
 Using this Module you can utilize the Monaco Editor as an Angular Component. Feel free to contribute, raise feature requests and make it better.
 
@@ -18,7 +19,7 @@ Supports all the options available in monaco-editor [Monaco Editor Options](http
 
 Install from npm repository:
 ```
-npm install ngx-monaco-editor --save
+npm install monaco-editor ngx-monaco-editor --save
  ```
  
 For angular version 6 use v6.x.x
@@ -32,7 +33,7 @@ Add the glob to assets in `.angular-cli.json` schema - `projects.[project-name].
   "options": {
     {
       "assets": [
-        { "glob": "**/*", "input": "node_modules/ngx-monaco-editor/assets/monaco", "output": "./assets/monaco/" }
+        { "glob": "**/*", "input": "node_modules/monaco-editor/monaco-editor", "output": "assets/monaco-editor" }
       ],
       ...
     }
@@ -180,7 +181,7 @@ import { MonacoEditorModule, NgxMonacoEditorConfig } from 'ngx-monaco-editor';
 import { AppComponent } from './app.component';
 
 const monacoConfig: NgxMonacoEditorConfig = {
-  baseUrl: 'app-name/assets', // configure base path for monaco editor default: './assets'
+  baseUrl: 'app-name/assets', // configure base path cotaining monaco-editor directory after build default: './assets'
   defaultOptions: { scrollBeyondLastLine: false }, // pass default options to be used
   onMonacoLoad: () => { console.log((<any>window).monaco); } // here monaco object will be available as window.monaco use this function to extend monaco editor functionalities.
 };

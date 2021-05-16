@@ -1,5 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, forwardRef, Inject, OnDestroy, Output, ViewChild } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Inject, OnDestroy, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NGX_MONACO_EDITOR_CONFIG, NgxMonacoEditorConfig } from './config';
 
@@ -27,15 +26,15 @@ export abstract class BaseEditor implements AfterViewInit, OnDestroy {
     } else {
       loadedMonaco = true;
       loadPromise = new Promise<void>((resolve: any) => {
-        const baseUrl = this.config.baseUrl || './assets/vs';
+        const baseUrl = (this.config.baseUrl || './assets') + '/monaco-editor/min/vs';
         if (typeof ((<any>window).monaco) === 'object') {
           resolve();
           return;
         }
         const onGotAmdLoader: any = () => {
           // Load monaco
-          // (<any>window).require.config({ paths: { 'vs': `${baseUrl}/vs` } });
-          (<any>window).require([`${baseUrl}/editor/editor.main`], () => {
+          (<any>window).require.config({ paths: { 'vs': `${baseUrl}` } });
+          (<any>window).require([`vs/editor/editor.main`], () => {
             if (typeof this.config.onMonacoLoad === 'function') {
               this.config.onMonacoLoad();
             }
