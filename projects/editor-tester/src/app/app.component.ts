@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DiffEditorModel, NgxEditorModel } from 'editor';
 
+declare var monaco: any;
+
 @Component({
   selector: 'app-root',
   template: `

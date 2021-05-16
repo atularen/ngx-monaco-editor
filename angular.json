@@ -4,16 +4,19 @@
   "newProjectRoot": "projects",
   "projects": {
     "editor-tester": {
-      "root": "projects/editor-tester/",
-      "sourceRoot": "projects/editor-tester/src",
       "projectType": "application",
+      "schematics": {
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/editor-tester",
+      "sourceRoot": "projects/editor-tester/src",
       "prefix": "app",
-      "schematics": {},
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "aot": true,
             "outputPath": "dist/editor-tester",
             "index": "projects/editor-tester/src/index.html",
             "main": "projects/editor-tester/src/main.ts",
@@ -24,57 +27,59 @@
               "projects/editor-tester/src/assets",
               {
                 "glob": "**/*",
-                "input": "node_modules/monaco-editor/min",
-                "output": "./assets/monaco/"
+                "input": "node_modules/monaco-editor",
+                "output": "assets/monaco-editor"
               }
             ],
             "styles": [
               "projects/editor-tester/src/styles.css"
             ],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "scripts": []
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "projects/editor-tester/src/environments/environment.ts",
                   "with": "projects/editor-tester/src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ]
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "editor-tester:build"
-          },
           "configurations": {
             "production": {
               "browserTarget": "editor-tester:build:production"
+            },
+            "development": {
+              "browserTarget": "editor-tester:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -82,16 +87,21 @@
             "browserTarget": "editor-tester:build"
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "tsConfig": [
-              "projects/editor-tester/tsconfig.app.json",
-              "projects/editor-tester/tsconfig.spec.json"
+            "main": "projects/editor-tester/src/test.ts",
+            "polyfills": "projects/editor-tester/src/polyfills.ts",
+            "tsConfig": "projects/editor-tester/tsconfig.spec.json",
+            "karmaConfig": "projects/editor-tester/karma.conf.js",
+            "assets": [
+              "projects/editor-tester/src/favicon.ico",
+              "projects/editor-tester/src/assets"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "styles": [
+              "projects/editor-tester/src/styles.css"
+            ],
+            "scripts": []
           }
         }
       }
@@ -103,27 +113,26 @@
       "prefix": "ngx-monaco",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "projects/editor/tsconfig.lib.json",
             "project": "projects/editor/ng-package.json"
           },
           "configurations": {
             "production": {
               "tsConfig": "projects/editor/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/editor/tsconfig.lib.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "tsConfig": [
-              "projects/editor/tsconfig.lib.json",
-              "projects/editor/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "main": "projects/editor/src/test.ts",
+            "tsConfig": "projects/editor/tsconfig.spec.json",
+            "karmaConfig": "projects/editor/karma.conf.js"
           }
         }
       }

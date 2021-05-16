@@ -5,6 +5,8 @@ import { BaseEditor } from './base-editor';
 import { NGX_MONACO_EDITOR_CONFIG, NgxMonacoEditorConfig } from './config';
 import { DiffEditorModel } from './types';
 
+declare var monaco: any;
+
 @Component({
   selector: 'ngx-monaco-diff-editor',
   template: '<div class="editor-container" #editorContainer></div>',
