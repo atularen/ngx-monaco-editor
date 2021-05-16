@@ -33,7 +33,7 @@ Add the glob to assets in `.angular-cli.json` schema - `projects.[project-name].
   "options": {
     {
       "assets": [
-        { "glob": "**/*", "input": "node_modules/monaco-editor/monaco-editor", "output": "assets/monaco-editor" }
+        { "glob": "**/*", "input": "node_modules/monaco-editor", "output": "assets/monaco-editor" }
       ],
       ...
     }

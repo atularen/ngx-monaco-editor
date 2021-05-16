@@ -1,6 +1,6 @@
 {
   "name": "ngx-monaco-editor",
-  "version": "10.0.0-beta.1",
+  "version": "12.0.0",
   "private": false,
   "description": "Monaco Code Editor for Angular",
   "keywords": [
@@ -14,6 +14,7 @@
     "angular 8",
     "angular 9",
     "angular 10",
+    "angular 12",
     "monaco",
     "monaco-editor",
     "code",
