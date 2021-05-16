@@ -1,10 +1,14 @@
-import { AfterViewInit, ElementRef, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, forwardRef, Inject, OnDestroy, Output, ViewChild } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { NgxMonacoEditorConfig } from './config';
+import { NGX_MONACO_EDITOR_CONFIG, NgxMonacoEditorConfig } from './config';
 
 let loadedMonaco = false;
 let loadPromise: Promise<void>;
 
+@Component({
+  template: ''
+})
 export abstract class BaseEditor implements AfterViewInit, OnDestroy {
   @ViewChild('editorContainer', { static: true }) _editorContainer: ElementRef;
   @Output() onInit = new EventEmitter<any>();
@@ -12,7 +16,7 @@ export abstract class BaseEditor implements AfterViewInit, OnDestroy {
   protected _options: any;
   protected _windowResizeSubscription: Subscription;
 
-  constructor(protected config: NgxMonacoEditorConfig) {}
+  constructor(@Inject(NGX_MONACO_EDITOR_CONFIG) protected config: NgxMonacoEditorConfig) {}
 
   ngAfterViewInit(): void {
     if (loadedMonaco) {

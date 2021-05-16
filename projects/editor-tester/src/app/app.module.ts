@@ -5,6 +5,8 @@ import { MonacoEditorModule, NgxMonacoEditorConfig } from 'editor';
 
 import { AppComponent } from './app.component';
 
+declare var monaco: any;
+
 export function onMonacoLoad() {
 
   console.log((window as any).monaco);
