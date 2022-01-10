@@ -35,8 +35,8 @@
     "Atul Kumar <atulaggarwal4288@gmail.com>"
   ],
   "peerDependencies": {
-    "@angular/common": "^12.0.0",
-    "@angular/core": "^12.0.0",
+    "@angular/common": "^13.1.1",
+    "@angular/core": "^13.1.1",
     "monaco-editor": "^0.24.0"
   },
   "dependencies": {

@@ -34,7 +34,7 @@ export class EditorComponent extends BaseEditor implements ControlValueAccessor 
   propagateChange = (_: any) => {};
   onTouched = () => {};
 
-  @Input('options')
+  @Input()
   set options(options: any) {
     this._options = Object.assign({}, this.config.defaultOptions, options);
     if (this._editor) {
@@ -47,7 +47,7 @@ export class EditorComponent extends BaseEditor implements ControlValueAccessor 
     return this._options;
   }
 
-  @Input('model')
+  @Input()
   set model(model: NgxEditorModel) {
     this.options.model = model;
     if (this._editor) {

@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Inject, OnDestroy, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { NGX_MONACO_EDITOR_CONFIG, NgxMonacoEditorConfig } from './config';
+import { NgxMonacoEditorConfig, NGX_MONACO_EDITOR_CONFIG } from './config';
 
 let loadedMonaco = false;
 let loadPromise: Promise<void>;
@@ -8,8 +8,10 @@ let loadPromise: Promise<void>;
 @Component({
   template: ''
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export abstract class BaseEditor implements AfterViewInit, OnDestroy {
   @ViewChild('editorContainer', { static: true }) _editorContainer: ElementRef;
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() onInit = new EventEmitter<any>();
   protected _editor: any;
   protected _options: any;
