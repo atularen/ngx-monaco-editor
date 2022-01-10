@@ -27,7 +27,7 @@ export class DiffEditorComponent extends BaseEditor {
   _originalModel: DiffEditorModel;
   _modifiedModel: DiffEditorModel;
 
-  @Input('options')
+  @Input()
   set options(options: any) {
     this._options = Object.assign({}, this.config.defaultOptions, options);
     if (this._editor) {
@@ -40,7 +40,7 @@ export class DiffEditorComponent extends BaseEditor {
     return this._options;
   }
 
-  @Input('originalModel')
+  @Input()
   set originalModel(model: DiffEditorModel) {
     this._originalModel = model;
     if (this._editor) {
@@ -49,7 +49,7 @@ export class DiffEditorComponent extends BaseEditor {
     }
   }
 
-  @Input('modifiedModel')
+  @Input()
   set modifiedModel(model: DiffEditorModel) {
     this._modifiedModel = model;
     if (this._editor) {
