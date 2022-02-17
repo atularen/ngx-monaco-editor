@@ -15,7 +15,9 @@ export abstract class BaseEditor implements AfterViewInit, OnDestroy {
   protected _options: any;
   protected _windowResizeSubscription: Subscription;
 
-  constructor(@Inject(NGX_MONACO_EDITOR_CONFIG) protected config: NgxMonacoEditorConfig) {}
+  constructor(@Inject(NGX_MONACO_EDITOR_CONFIG) protected config: NgxMonacoEditorConfig) {
+    this._options = Object.assign({}, this.config.defaultOptions)
+  }
 
   ngAfterViewInit(): void {
     if (loadedMonaco) {
