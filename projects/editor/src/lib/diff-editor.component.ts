@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, NgZone } from '@angular/core';
 import { fromEvent } from 'rxjs';
 
 import { BaseEditor } from './base-editor';
@@ -32,7 +32,7 @@ export class DiffEditorComponent extends BaseEditor {
     this._options = Object.assign({}, this.config.defaultOptions, options);
     if (this._editor) {
       this._editor.dispose();
-      this.initMonaco(options);
+      this.initMonaco(options, this.insideNg);
     }
   }
 
@@ -45,7 +45,7 @@ export class DiffEditorComponent extends BaseEditor {
     this._originalModel = model;
     if (this._editor) {
       this._editor.dispose();
-      this.initMonaco(this.options);
+      this.initMonaco(this.options, this.insideNg);
     }
   }
 
@@ -54,15 +54,15 @@ export class DiffEditorComponent extends BaseEditor {
     this._modifiedModel = model;
     if (this._editor) {
       this._editor.dispose();
-      this.initMonaco(this.options);
+      this.initMonaco(this.options, this.insideNg);
     }
   }
 
-  constructor(@Inject(NGX_MONACO_EDITOR_CONFIG) private editorConfig: NgxMonacoEditorConfig) {
+  constructor(private zone: NgZone, @Inject(NGX_MONACO_EDITOR_CONFIG) private editorConfig: NgxMonacoEditorConfig) {
     super(editorConfig);
   }
 
-  protected initMonaco(options: any): void {
+  protected initMonaco(options: any, insideNg: boolean): void {
 
     if (!this._originalModel || !this._modifiedModel) {
       throw new Error('originalModel or modifiedModel not found for ngx-monaco-diff-editor');
@@ -76,7 +76,15 @@ export class DiffEditorComponent extends BaseEditor {
 
     this._editorContainer.nativeElement.innerHTML = '';
     const theme = options.theme;
-    this._editor = monaco.editor.createDiffEditor(this._editorContainer.nativeElement, options);
+
+    if (insideNg) {
+      this._editor = monaco.editor.createDiffEditor(this._editorContainer.nativeElement, options);
+    } else {
+      this.zone.runOutsideAngular(() => {
+        this._editor = monaco.editor.createDiffEditor(this._editorContainer.nativeElement, options);
+      })
+    }
+
     options.theme = theme;
     this._editor.setModel({
       original: originalModel,

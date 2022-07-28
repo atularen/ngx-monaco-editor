@@ -39,7 +39,7 @@ export class EditorComponent extends BaseEditor implements ControlValueAccessor 
     this._options = Object.assign({}, this.config.defaultOptions, options);
     if (this._editor) {
       this._editor.dispose();
-      this.initMonaco(options);
+      this.initMonaco(options, this.insideNg);
     }
   }
 
@@ -52,7 +52,7 @@ export class EditorComponent extends BaseEditor implements ControlValueAccessor 
     this.options.model = model;
     if (this._editor) {
       this._editor.dispose();
-      this.initMonaco(this.options);
+      this.initMonaco(this.options, this.insideNg);
     }
   }
 
@@ -78,7 +78,7 @@ export class EditorComponent extends BaseEditor implements ControlValueAccessor 
     this.onTouched = fn;
   }
 
-  protected initMonaco(options: any): void {
+  protected initMonaco(options: any, insideNg: boolean): void {
 
     const hasModel = !!options.model;
 
@@ -92,7 +92,13 @@ export class EditorComponent extends BaseEditor implements ControlValueAccessor 
       }
     }
 
-    this._editor = monaco.editor.create(this._editorContainer.nativeElement, options);
+    if (insideNg) {
+      this._editor = monaco.editor.create(this._editorContainer.nativeElement, options);
+    } else {
+      this.zone.runOutsideAngular(() => {
+        this._editor = monaco.editor.create(this._editorContainer.nativeElement, options);
+      })
+    }
 
     if (!hasModel) {
       this._editor.setValue(this._value);
