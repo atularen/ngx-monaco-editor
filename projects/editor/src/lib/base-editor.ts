@@ -74,6 +74,7 @@ export abstract class BaseEditor implements AfterViewInit, OnDestroy {
           loaderScript.type = 'text/javascript';
           loaderScript.src = `${baseUrl}/loader.js`;
           loaderScript.addEventListener('load', onGotAmdLoader);
+          /*@@TODO MIKI */ console.error(loaderScript);
           document.body.appendChild(loaderScript);
         } else {
           onGotAmdLoader();
