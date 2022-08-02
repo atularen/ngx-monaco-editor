@@ -26,36 +26,36 @@ For angular version 6 use v6.x.x
 ```
 npm install ngx-monaco-editor@6.0.0 --save
  ```
- 
-Add the glob to assets in `.angular-cli.json` schema - `projects.[project-name].architect.build` (to make monaco-editor lib available to the app):
-```typescript
-{
-  "options": {
-    {
-      "assets": [
-        { "glob": "**/*", "input": "node_modules/monaco-editor", "output": "assets/monaco-editor" }
-      ],
-      ...
-    }
-    ...
-  },
-  ...
-}
- ```
 
-
-For Angular 6 and below, add the glob to assets in `angular.json`
+Add the glob to assets in `angular.json`
 ```typescript
 {
   "apps": [
     {
       "assets": [
-        { "glob": "**/*", "input": "../node_modules/ngx-monaco-editor/assets/monaco", "output": "./assets/monaco/" }
+      { "glob": "**/*", "input": "../node_modules/ngx-monaco-editor/assets/monaco", "output": "./assets/monaco/" }
       ],
       ...
     }
     ...
   ],
+  ...
+}
+ ```
+
+
+For Angular 6 and below, add the glob to assets in `.angular-cli.json` schema - `projects.[project-name].architect.build` (to make monaco-editor lib available to the app):
+```typescript
+{
+  "options":{
+        {"assets": [
+          { "glob": "**/*", "input": "node_modules/ngx-monaco-editor/assets/monaco", "output": "./assets/monaco/" }
+
+        ],
+        ...
+        }
+    ...
+    },
   ...
 }
  ```
