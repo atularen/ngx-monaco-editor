@@ -181,7 +181,7 @@ import { MonacoEditorModule, NgxMonacoEditorConfig } from 'ngx-monaco-editor';
 import { AppComponent } from './app.component';
 
 const monacoConfig: NgxMonacoEditorConfig = {
-  baseUrl: 'app-name/assets', // configure base path cotaining monaco-editor directory after build default: './assets'
+  baseUrl: 'app-name/assets', // configure base path for monaco editor. Starting with version 8.0.0 it defaults to './assets'. Previous releases default to '/assets'
   defaultOptions: { scrollBeyondLastLine: false }, // pass default options to be used
   onMonacoLoad: () => { console.log((<any>window).monaco); } // here monaco object will be available as window.monaco use this function to extend monaco editor functionalities.
 };
