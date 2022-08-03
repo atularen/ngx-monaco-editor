@@ -8,10 +8,11 @@
  - Angular 9: v9.x.x
  - Angular 10: v10.x.x 
  - Angular 12: v12.x.x
+ - Angular 14: v14.x.x
 
 Using this Module you can utilize the Monaco Editor as an Angular Component. Feel free to contribute, raise feature requests and make it better.
 
-Supports all the options available in monaco-editor [Monaco Editor Options](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditorconstructionoptions.html)
+Supports all the options available in monaco-editor [Monaco Editor Options](https://microsoft.github.io/monaco-editor/api/index.html)
 
 ## Setup
 
@@ -19,43 +20,45 @@ Supports all the options available in monaco-editor [Monaco Editor Options](http
 
 Install from npm repository:
 ```
-npm install monaco-editor ngx-monaco-editor --save
+npm install monaco-editor ngx-monaco-editor-v2 --save
  ```
+
+Breaking change from v10, is to use monaco-editor next to ngx-monaco-editor-v2
  
 For angular version 6 use v6.x.x
 ```
-npm install ngx-monaco-editor@6.0.0 --save
- ```
- 
-Add the glob to assets in `.angular-cli.json` schema - `projects.[project-name].architect.build` (to make monaco-editor lib available to the app):
-```typescript
-{
-  "options": {
-    {
-      "assets": [
-        { "glob": "**/*", "input": "node_modules/monaco-editor", "output": "assets/monaco-editor" }
-      ],
-      ...
-    }
-    ...
-  },
-  ...
-}
+npm install ngx-monaco-editor-v2@6.0.0 --save
  ```
 
-
-For Angular 6 and below, add the glob to assets in `angular.json`
+Add the glob to assets in `angular.json`
 ```typescript
 {
   "apps": [
     {
       "assets": [
-        { "glob": "**/*", "input": "../node_modules/ngx-monaco-editor/assets/monaco", "output": "./assets/monaco/" }
+      { "glob": "**/*", "input": "../node_modules/ngx-monaco-editor/assets/monaco", "output": "./assets/monaco/" }
       ],
       ...
     }
     ...
   ],
+  ...
+}
+ ```
+
+
+For Angular 6 and below, add the glob to assets in `.angular-cli.json` schema - `projects.[project-name].architect.build` (to make monaco-editor lib available to the app):
+```typescript
+{
+  "options":{
+        {"assets": [
+          { "glob": "**/*", "input": "node_modules/ngx-monaco-editor/assets/monaco", "output": "./assets/monaco/" }
+
+        ],
+        ...
+        }
+    ...
+    },
   ...
 }
  ```
@@ -181,7 +184,7 @@ import { MonacoEditorModule, NgxMonacoEditorConfig } from 'ngx-monaco-editor';
 import { AppComponent } from './app.component';
 
 const monacoConfig: NgxMonacoEditorConfig = {
-  baseUrl: 'app-name/assets', // configure base path cotaining monaco-editor directory after build default: './assets'
+  baseUrl: 'app-name/assets', // configure base path for monaco editor. Starting with version 8.0.0 it defaults to './assets'. Previous releases default to '/assets'
   defaultOptions: { scrollBeyondLastLine: false }, // pass default options to be used
   onMonacoLoad: () => { console.log((<any>window).monaco); } // here monaco object will be available as window.monaco use this function to extend monaco editor functionalities.
 };
