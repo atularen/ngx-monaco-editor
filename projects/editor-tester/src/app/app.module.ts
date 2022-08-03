@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { MonacoEditorModule, NgxMonacoEditorConfig } from 'editor';
 
 import { AppComponent } from './app.component';
+import { NgxMonacoEditorConfig } from '../../../editor/src/lib/config';
+import { MonacoEditorModule } from '../../../editor/src/lib/editor.module';
 
 declare var monaco: any;
 

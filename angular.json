@@ -27,8 +27,13 @@
               "projects/editor-tester/src/assets",
               {
                 "glob": "**/*",
-                "input": "node_modules/monaco-editor",
-                "output": "assets/monaco-editor"
+                "input": "node_modules/monaco-editor/min",
+                "output": "./assets/monaco/min"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/monaco-editor/min-maps",
+                "output": "./assets/monaco/min-maps"
               }
             ],
             "styles": [
@@ -138,5 +143,7 @@
       }
     }
   },
-  "defaultProject": "editor-tester"
+  "cli": {
+    "analytics": "72066354-96f9-4e53-bc61-34a393f09d37"
+  }
 }
