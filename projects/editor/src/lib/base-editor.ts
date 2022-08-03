@@ -51,14 +51,14 @@ export abstract class BaseEditor implements AfterViewInit, OnDestroy {
     } else {
       loadedMonaco = true;
       loadPromise = new Promise<void>((resolve: any) => {
-        const baseUrl = (this.config.baseUrl || './assets') + '/monaco-editor/min/vs';
+        const baseUrl = this.config.baseUrl || "./assets";
         if (typeof ((<any>window).monaco) === 'object') {
           resolve();
           return;
         }
         const onGotAmdLoader: any = () => {
           // Load monaco
-          (<any>window).require.config({ paths: { 'vs': `${baseUrl}` } });
+          (<any>window).require.config({ paths: { vs: `${baseUrl}/monaco/min/vs` } });
           (<any>window).require([`vs/editor/editor.main`], () => {
             if (typeof this.config.onMonacoLoad === 'function') {
               this.config.onMonacoLoad();
@@ -72,9 +72,8 @@ export abstract class BaseEditor implements AfterViewInit, OnDestroy {
         if (!(<any>window).require) {
           const loaderScript: HTMLScriptElement = document.createElement('script');
           loaderScript.type = 'text/javascript';
-          loaderScript.src = `${baseUrl}/loader.js`;
+          loaderScript.src = `${baseUrl}/monaco/min/vs/loader.js`;
           loaderScript.addEventListener('load', onGotAmdLoader);
-          /*@@TODO MIKI */ console.error(loaderScript);
           document.body.appendChild(loaderScript);
         } else {
           onGotAmdLoader();
