@@ -8,6 +8,7 @@
  - Angular 9: v9.x.x
  - Angular 10: v10.x.x 
  - Angular 12: v12.x.x
+ - Angular 13: not supported ( best to use 14, otherwise contact author)
  - Angular 14: v14.x.x
 
 Using this Module you can utilize the Monaco Editor as an Angular Component. Feel free to contribute, raise feature requests and make it better.
@@ -23,7 +24,7 @@ Install from npm repository:
 npm install monaco-editor ngx-monaco-editor-v2 --save
  ```
 
-Breaking change from v10, is to use monaco-editor next to ngx-monaco-editor-v2
+Breaking change from v10, is to use monaco-editor next to ngx-monaco-editor-v2 in your package.json file.
  
 For angular version 6 use v6.x.x
 ```
@@ -36,7 +37,7 @@ Add the glob to assets in `angular.json`
   "apps": [
     {
       "assets": [
-      { "glob": "**/*", "input": "../node_modules/ngx-monaco-editor/assets/monaco", "output": "./assets/monaco/" }
+      { "glob": "**/*", "input": "node_modules/monaco-editor", "output": "/assets/monaco/" }
       ],
       ...
     }
@@ -303,8 +304,8 @@ export class AppComponent {
 
 ## Links
 [Monaco Editor](https://github.com/Microsoft/monaco-editor/)<br/>
-[Monaco Editor Options](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditorconstructionoptions.html)
+[Monaco Editor Options](https://microsoft.github.io/monaco-editor/api/index.html)
 
 ## License
 
-MIT © [Atul Kumar](https://github.com/atularen)
+MIT © [Miroslav Maksimovic](https://github.com/miki995)
