@@ -1,6 +1,6 @@
 {
   "name": "ngx-monaco-editor-v2",
-  "version": "14.0.3",
+  "version": "14.0.4",
   "private": false,
   "description": "Monaco Code Editor for Angular",
   "keywords": [
@@ -25,15 +25,16 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/atularen/ngx-monaco-editor.git"
+    "url": "https://github.com/miki995/ngx-monaco-editor-v2.git"
   },
   "bugs": {
-    "url": "https://github.com/atularen/ngx-monaco-editor/issues"
+    "url": "https://github.com/miki995/ngx-monaco-editor-v2/issues"
   },
   "license": "MIT",
-  "author": "Atul Kumar",
+  "author": "Miroslav Maksimovic",
   "contributors": [
-    "Atul Kumar <atulaggarwal4288@gmail.com>"
+    "Atul Kumar <atulaggarwal4288@gmail.com>",
+    "Miroslav Maksimovic <miroslavmaksimovic95@gmail.com>"
   ],
   "peerDependencies": {
     "@angular/common": "^14.1.0",

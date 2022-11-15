@@ -1,6 +1,6 @@
 {
   "name": "ngx-monaco-editor-v2",
-  "version": "14.0.3",
+  "version": "14.0.4",
   "description": "Monaco Code Editor For Angular",
   "keywords": [
     "angular",
@@ -29,7 +29,7 @@
     "url": "https://github.com/miki995/ngx-monaco-editor-v2.git"
   },
   "bugs": {
-    "url": "https://github.com/miki995/ngx-monaco-editor-v2/pulls"
+    "url": "https://github.com/miki995/ngx-monaco-editor-v2/issues"
   },
   "author": "Miroslav Maksimovic",
   "contributors": [
