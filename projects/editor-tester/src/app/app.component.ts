@@ -14,7 +14,6 @@ declare var monaco: any;
     <button (click)="showMultiple = !showMultiple">{{showMultiple ? 'Hide' : 'Show'}} Multiple Editor</button>
 
     <div style="height: 100px">
-      MIKI
         <ngx-monaco-editor style="height: 100%" [options]="options" [(ngModel)]="code" (onInit)="onInit($event)"></ngx-monaco-editor>
     </div>
 
