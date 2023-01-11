@@ -16,6 +16,12 @@ Using this Module you can utilize the Monaco Editor as an Angular Component. Fee
 
 Supports all the options available in monaco-editor [Monaco Editor Options](https://microsoft.github.io/monaco-editor/api/index.html)
 
+## Demo
+
+https://ngx-monaco-editor-v2.surge.sh/
+
+![img.png](img.png)
+
 ## Setup
 
 ### Installation

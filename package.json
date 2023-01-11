@@ -19,6 +19,7 @@
     "build:prod": "ng build --project=editor-tester --base-href=editor-tester",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "build-and-deploy-demo": "npm run build:prod && cp dist/editor-tester/index.html dist/editor-tester/200.html && cd dist/editor-tester && surge --domain ngx-monaco-editor-v2.surge.sh",
     "build-editor": "npm run copy:readme && ng build editor",
     "npm-publish": "npm run build-editor && bash npm-publish",
     "copy:readme": "cp -rf README.md projects/editor/"
