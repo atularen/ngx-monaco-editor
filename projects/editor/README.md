@@ -10,6 +10,7 @@
  - Angular 12: v12.x.x
  - Angular 13: not supported ( best to use 14, otherwise contact author)
  - Angular 14: v14.x.x
+ - Angular 15: v15.x.x
 
 Using this Module you can utilize the Monaco Editor as an Angular Component. Feel free to contribute, raise feature requests and make it better.
 
@@ -72,7 +73,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 
 @NgModule({
   declarations: [
