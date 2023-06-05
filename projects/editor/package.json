@@ -1,6 +1,6 @@
 {
   "name": "ngx-monaco-editor-v2",
-  "version": "15.0.1",
+  "version": "16.0.0",
   "private": false,
   "description": "Monaco Code Editor for Angular",
   "keywords": [
@@ -17,6 +17,7 @@
     "angular 12",
     "angular 14",
     "angular 15",
+    "angular 16",
     "monaco",
     "monaco-editor",
     "code",
@@ -39,9 +40,9 @@
     "Thomas-Louis Simard <thomas.louis.simard@gmail.com>"
   ],
   "peerDependencies": {
-    "@angular/common": "^15.0.2",
-    "@angular/core": "^15.0.2",
-    "monaco-editor": "^0.34.1"
+    "@angular/common": "^16.0.4",
+    "@angular/core": "^16.0.4",
+    "monaco-editor": "^0.38.0"
   },
   "dependencies": {
     "tslib": "^2.1.0"
