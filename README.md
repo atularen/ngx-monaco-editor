@@ -196,6 +196,8 @@ const monacoConfig: NgxMonacoEditorConfig = {
   baseUrl: 'app-name/assets', // configure base path for monaco editor. Starting with version 8.0.0 it defaults to './assets'. Previous releases default to '/assets'
   defaultOptions: { scrollBeyondLastLine: false }, // pass default options to be used
   onMonacoLoad: () => { console.log((<any>window).monaco); } // here monaco object will be available as window.monaco use this function to extend monaco editor functionalities.
+  requireConfig: { preferScriptTags: true } // allows to oweride configuration passed to monacos loader
+  monacoRequire: (<any>window).monacoRequire // pass here monacos require function if you loaded monacos loader (loader.js) yourself 
 };
 
 @NgModule({
@@ -307,6 +309,99 @@ export class AppComponent {
     language: 'json',
     uri: monaco.Uri.parse('a://b/foo.json')
   };
+}
+```
+
+### Configuration for Electron
+If you expose node's `require` in your render process, monaco will try to use its `NodeScriptLoader` and fail to load its files. To presuade it to use its `BrowserScriptLoader` instead it is necessery to set `preferScriptTags` to true.
+```typescript
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { MonacoEditorModule, NgxMonacoEditorConfig } from 'ngx-monaco-editor';
+import { AppComponent } from './app.component';
+
+const monacoConfig: NgxMonacoEditorConfig = {
+  baseUrl: 'assets', 
+  requireConfig: { preferScriptTags: true }
+};
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    MonacoEditorModule.forRoot(monacoConfig)
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule {
+}
+```
+If for some reason you want to load monaco yourself. 
+```html
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Angular Electron</title>
+  <base href="./">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico">
+</head>
+
+<body>
+  <app-root></app-root>
+  <script>
+    // Monaco uses a custom amd loader that over-rides node's require.
+    // Keep a reference to node's require so we can restore it after executing the amd loader file.
+    var nodeRequire = require;
+  </script>
+  <script src="assets/monaco/min/vs/loader.js"></script>
+  <script type="text/javascript">
+    // Save Monaco's amd require and restore Node's require
+    var monacoRequire = require;
+    require = nodeRequire;
+    require.nodeRequire = require;
+  </script>
+</body>
+
+</html>
+```
+You just need to save monaco `require` function defined in `loader.js` somewhere and pass it to `monacoRequire` in configuration.
+```typescript
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { MonacoEditorModule, NgxMonacoEditorConfig } from 'ngx-monaco-editor';
+import { AppComponent } from './app.component';
+
+const monacoConfig: NgxMonacoEditorConfig = {
+  baseUrl: 'assets', 
+  requireConfig: { preferScriptTags: true },
+  monacoRequire: (window as any).monacoRequire
+};
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    MonacoEditorModule.forRoot(monacoConfig)
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule {
 }
 ```
 
